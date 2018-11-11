@@ -107,7 +107,7 @@ app.post('/:hospitalname/:hospitalid/register-employee', (req, res) => {
 
     let hospitalname = req.params.hospitalname;
     let hospitalid = req.params.hospitalid;
-    
+
     console.log(hospitalid)
     let username = req.body.username;
     let password = req.body.password;
@@ -141,9 +141,9 @@ app.post('/:hospitalname/:hospitalid/register-employee', (req, res) => {
         let errorType = e.name;
 
         if (errorType === 'QueryResultError') {
-            let employeeExistsTrue = "That hospital is already registered";
+            let employeeExistsTrue = "That username is already registered";
 
-            res.render('./index', {employeeExistsTrue : employeeExistsTrue});
+            res.render('hospital-home', {employeeExistsTrue : employeeExistsTrue});
         } else {
             db.none('INSERT INTO employees(username, password, employeefirstname, employeelastname, address, city, state, zipcode, telephone, hospitalid) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [username, password, employeefirstname, employeelastname, address, city, state, zipcode, telephone, hospitalid]).then(() => {
                 console.log(hospitalname)
@@ -179,7 +179,9 @@ app.post('/log-in-hospital', (req, res) => {
 });
 
 
-
+app.get('/:hospital/:hospitalid/:username/:employeeid/home',(req, res) => {
+    res.render('employee-home');
+})
 
 
 

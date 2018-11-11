@@ -21,7 +21,7 @@
             {{hospital.state}}
             {{hospital.zipcode}}
             {{hospital.telephone}}
-
+            {{hospital.hospitalid}}
             <nav>
                 <form action="/{{hospital.hospitalname}}/{{hospital.hospitalid}}/log-in-employee" method="POST">
                     <label class="credential-label">Log In:</label>
@@ -67,7 +67,7 @@
                     <input type="number" name="zipcode" min="10000" max="99999" placeholder="Zipcode" required /><br />
 
                     <label class="credential-label">Telephone:</label>
-                    <input type="tel" name="telephone" placeholder="555-555-5555" required /><br />
+                    <input type="tel" name="telephone" placeholder="555-555-5555" /><br />
 
                     <input type="submit" value="Register" />
                     <input type="reset" />
