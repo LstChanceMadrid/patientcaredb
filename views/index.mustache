@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <title>Index</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="stylesheet" type="text/css" href="../styles/main.css" />
+    </head>
+
+    <body>
+        <header>
+            <h1>Hospital Administration</h1>
+
+            <nav>
+                <form action="/log-in-hospital" method="POST">
+                    <label class="credential-label">Log In:</label>
+
+                    <input class="credential-input" type="text" name="hospitalname" placeholder="Hospital Name" required />
+
+                    <input class="credential-input" type="password" name="accesscode" placeholder="Access Code" autofocus required />
+
+                    <input type="submit" value="Log In" />
+
+                    {{hospitalExistsFalse}}
+                </form>
+            </nav>
+        </header>
+
+        <main>
+            <form action="/register-hospital" method="POST">
+                <fieldset>
+                    <legend>Reqister Hospital:</legend>
+
+                    <label class="credential-label">Hospital Name:</label>
+                    <input type="text" name="hospitalname" placeholder="Hospital Name" required /><br />
+
+                    <label class="credential-label">Access Code:</label>
+                    <input type="password" name="accesscode" placeholder="Access Code" required /><br />
+
+                    <label class="credential-label">Street:</label>
+                    <input type="text" name="address" placeholder="Address" required /><br />
+
+                    <label class="credential-label">City:</label>
+                    <input type="text" name="city" placeholder="City" required /><br />
+
+                    <label class="credential-label">State:</label>
+                    <input type="text" name="state" placeholder="State" required /><br />
+
+                    <label class="credential-label">Zipcode:</label>
+                    <input type="number" name="zipcode" min="10000" max="99999" placeholder="Zipcode" required /><br />
+
+                    <label class="credential-label">Telephone:</label>
+                    <input type="tel" name="telephone" placeholder="555-555-5555" required /><br />
+
+                    <input type="submit" value="Register" />
+                    <input type="reset" />
+                </fieldset>                    
+            </form>
+            <div>{{hospitalExistsTrue}}</div>
+        </main>
+
+        <footer>
+        </footer>
+    </body>
+
+    <script src=""></script>
+</html>
