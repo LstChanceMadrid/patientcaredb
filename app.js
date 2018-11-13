@@ -144,7 +144,7 @@ app.post(HOSPITAL_PARAMS + '/log-in-employee', (req, res) => {
     let password = req.body.password;
 
     db.one('SELECT employees.employeeid, employees.username, employees.password, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = hospitals.hospitalid WHERE employees.username = $1 AND employees.password = $2', [username, password]).then(result => {
-        console.log('hello')
+
         let hospitalname = result.hospitalname;
         let hospitalid = result.hospitalid;
 
@@ -177,7 +177,7 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/home',(req, res) => {
     let employeeid = req.params.employeeid;
 
     db.any('SELECT patients.firstname, patients.lastname, patients.dob, patients.sex, hospitals.hospitalid FROM patients INNER JOIN hospitals ON hospitals.hospitalid = $1', [hospitalid]).then(patients => {
-        res.render('employee-home', {patients : patients});
+        res.render('patients', {patients : patients});
     }).catch(e => {
         console.log(e)
     });
