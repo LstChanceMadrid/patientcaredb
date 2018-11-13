@@ -165,15 +165,91 @@ app.post('/:hospitalname/:hospitalid/log-in-employee', (req, res) => {
     });
 });
 
+app.get('/:hospitalname/:hospitalid/:username/:employeeid/home',(req, res) => {
 
-app.get('/:hospital/:hospitalid/:username/:employeeid/home',(req, res) => {
-    res.render('employee-home');
+    let hospitalname = req.params.hospitalname;
+    let hospitalid = req.params.hospitalid;
+    let username = req.params.username;
+    let employeeid = req.params.employeeid;
+
+    db.any('SELECT patients.firstname, patients.lastname, patients.dateofbirth, patients.gender FROM patients WHERE hospitals.hospitalid = $1', [hospitalid]).then(patients => {
+        res.render('employee-home', {patients : patients});
+        });
 });
 
+app.post('/:hospitalname/:hospitalid/:username/:employeeid/admit-patient', (req, res) => {
 
+    let hospitalname = req.params.hospital;
+    let hospitalid = req.params.hospitalid;
+    let username = req.params.username;
+    let employeeid = req.params.employeeid;
+    
+    let admissiondate = req.body.admissiondate
+    let firstname = reg.body.firstname;
+    let lastname = reg.body.lastname;
+    let dateofbirth = reg.body.dateofbirth;
+    let gender = reg.body.gender;
+    let address = reg.body.address;
+    let city = req.body.city;
+    let state = req.body.state;
+    let zipcode = req.body.zipcode;
+    let reasonforvisit = reg.body.reasonforvisit;
+    let medication = reg.body.medication;
+    let drugallergies = reg.body.drugallergies;
+    let roomnumber = reg.body.roomnumber;
+    let dischargedate = req.body.dischargedate;
 
+    db.one('INSERT INTO patients(admissiondate, firstname, lastname, dateofbirth, gender, address, city, state, zipcode, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)', [admissiondate, firstname, lastname, dateofbirth, gender, address, city, state, zipcode, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate]).then(() => {
 
+        res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/home');
+    });
+});
 
+app.post('/:hospitalname/:hospitalid/:username/:employeeid/:patientid/patient-info', (req, res) => {
+    let hospitalname = req.params.hospital;
+    let hospitalid = req.params.hospitalid;
+    let username = req.params.username;
+    let employeeid = req.params.employeeid;
+    let patientid = req.params.patientid;
+    
+    db.one('SELECT * FROM patients WHERE hospitals.hospitalid = patients.hospitalid AND patients.patientid = $2', [hospitalid, patientid]).then(patient => {
+        res.render('patient-info', {patient : patient});
+    });
+});
+
+app.get('/:hospitalname/:hospitalid/:username/:employeeid/:patientid/patient-info', (req, res) => {
+
+    db.one('SELECT * FROM patients WHERE patientid = $1', [patientid]).then(patient => {
+        res.render('patient-info', {patient : patient});
+    });
+})
+
+app.post('/:hospitalname/:hospitalid/:username/:employeeid/:patientid/edit-info', (req, res) => {
+    
+    let hospitalname = req.params.hospital;
+    let hospitalid = req.params.hospitalid;
+    let username = req.params.username;
+    let employeeid = req.params.employeeid;
+    let patientid = req.params.patientid;
+    
+    let firstname = reg.body.firstname;
+    let lastname = reg.body.lastname;
+    let dateofbirth = reg.body.dateofbirth;
+    let gender = reg.body.gender;
+    let address = reg.body.address;
+    let city = req.body.city;
+    let state = req.body.state;
+    let zipcode = req.body.zipcode;
+    let reasonforvisit = reg.body.reasonforvisit;
+    let medication = reg.body.medication;
+    let drugallergies = reg.body.drugallergies;
+    let roomnumber = reg.body.roomnumber;
+    let dischargedate = req.body.dischargedate;
+
+    db.one('UPDATE patients SET firstname = $1, lastname = $2, dateofbirth = $3, gender = $4, address = $5, city = $6, state = $7, zipcode = $8, reasonforvisit = $9, medication = $10, drugallergies = $11, roomnumber = $12, dischargedate = $13 WHERE patientid = $14', [firstname, lastname, dateofbirth, gender, address, city, state, zipcode, reasonforvisit, medication, drugallergies, roomnumber, dischargedate, patientid]).then(() => {
+        res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/:patientid/patient-info');
+    })
+})
 
 
 
