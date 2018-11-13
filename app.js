@@ -138,12 +138,13 @@ app.post(HOSPITAL_PARAMS + '/register-employee', (req, res) => {
 
 app.post(HOSPITAL_PARAMS + '/log-in-employee', (req, res) => {
     let hospitalname = req.params.hospitalname;
+    let hospitalid = req.params.hospitalid
     
     let username = req.body.username;
     let password = req.body.password;
 
     db.one('SELECT employees.employeeid, employees.username, employees.password, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = hospitals.hospitalid WHERE employees.username = $1 AND employees.password = $2', [username, password]).then(result => {
-
+        console.log('hello')
         let hospitalname = result.hospitalname;
         let hospitalid = result.hospitalid;
 
@@ -175,9 +176,11 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/home',(req, res) => {
     let username = req.params.username;
     let employeeid = req.params.employeeid;
 
-    db.any('SELECT patients.firstname, patients.lastname, patients.dob, patients.sex FROM patients WHERE hospitals.hospitalid = $1', [hospitalid]).then(patients => {
+    db.any('SELECT patients.firstname, patients.lastname, patients.dob, patients.sex, hospitals.hospitalid FROM patients INNER JOIN hospitals ON hospitals.hospitalid = $1', [hospitalid]).then(patients => {
         res.render('employee-home', {patients : patients});
-        });
+    }).catch(e => {
+        console.log(e)
+    });
 });
 
 app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
@@ -230,6 +233,8 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
     db.one('INSERT INTO patients(admissiondate, firstname, lastname, dob, sex, maritalstatus, countryofbirth, address, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40)', [admissiondate, firstname, lastname, dob, sex, maritalstatus, address, countryofbirth, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations]).then(() => {
 
         res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/home');
+    }).catch(e => {
+        console.log(e)
     });
 });
 
@@ -242,6 +247,8 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/patient-info', (req, r
     
     db.one('SELECT * FROM patients WHERE hospitals.hospitalid = patients.hospitalid AND patients.patientid = $2', [hospitalid, patientid]).then(patient => {
         res.render('patient-info', {patient : patient});
+    }).catch(e => {
+        console.log(e)
     });
 });
 
@@ -249,6 +256,8 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/patient-info', (req, re
 
     db.one('SELECT * FROM patients WHERE patientid = $1', [patientid]).then(patient => {
         res.render('patient-info', {patient : patient});
+    }).catch(e => {
+        console.log(e)
     });
 })
 
@@ -302,6 +311,8 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res)
 
     db.one('UPDATE patients SET admissiondate = $1, firstname = $2, lastname = $3, dob = $4, sex = $5, maritalstatus = $6, countryofbirth = $7, address = $8, city = $9, state = $10, zipcode = $11, telephone = $12, email = $13, religion = $14, citizen = $15, reasonforvisit = $16, medication = $17, drugallergies = $18, roomnumber = $19, hospitalid = $20, dischargedate = $21, surgical = $22, medical = $23, psychiatric = $24, admissiontype = $25, communication = $26, vision = $27, hearing = $28, assistivedevices = $29, toileting = $30, medicationadministration = $31, feeding = $32, diettexture = $33, ambulation = $34, personalhygiene = $35, oralhygiene = $36, headofbedelevated = $37, additionalnotes = $38, diagnosis = $39, operations = $40 WHERE patientid = $41', [admissiondate, firstname, lastname, dob, sex, maritalstatus, address, countryofbirth, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations]).then(() => {
         res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/:patientid/patient-info');
+    }).catch(e => {
+        console.log(e)
     })
 })
 
