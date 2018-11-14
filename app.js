@@ -169,7 +169,7 @@ app.post(HOSPITAL_PARAMS + '/log-in-employee', (req, res) => {
     });
 });
 
-app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/home',(req, res) => {
+app.get(HOSPITAL_PARAMS + '/:username/:eployeeid/home',(req, res) => {
 
     let hospitalname = req.params.hospitalname;
     let hospitalid = req.params.hospitalid;
