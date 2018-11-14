@@ -169,7 +169,7 @@ app.post(HOSPITAL_PARAMS + '/log-in-employee', (req, res) => {
     });
 });
 
-app.get(HOSPITAL_PARAMS + '/:username/:eployeeid/home',(req, res) => {
+app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/home',(req, res) => {
 
     let hospitalname = req.params.hospitalname;
     let hospitalid = req.params.hospitalid;
@@ -186,9 +186,10 @@ app.get(HOSPITAL_PARAMS + '/:username/:eployeeid/home',(req, res) => {
 app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/new-patient', (req, res) => {
 
     let employeeid = req.params.employeeid;
-
+    console.log(employeeid)
     db.one('SELECT employees.username, employees.employeeid, employees.hospitalid, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = hospitals.hospitalid WHERE employees.employeeid = $1', [employeeid]).then(result => {
-        res.render('patients', {result : result});
+        console.log(employeeid)
+        res.render('patients', {result : result, employeeid : employeeid});
     }).catch(e => {
         console.log(e)
     })
