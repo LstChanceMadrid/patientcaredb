@@ -17,6 +17,7 @@ const EMPLOYEE_PARAMS = '/:username/:employeeid';
 
 // access to main.css file
 app.use('/styles', express.static('styles'));
+app.use('/scripts', express.static('scripts'))
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session(sess));
