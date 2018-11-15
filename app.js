@@ -12,8 +12,8 @@ const port = 3000;
 
 const HOSPITAL_PARAMS = '/:hospitalname/:hospitalid';
 const EMPLOYEE_PARAMS = '/:username/:employeeid';
-// access to main.css file
 
+// access to main.css file
 app.use('/styles', express.static('styles'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -111,8 +111,8 @@ app.post(HOSPITAL_PARAMS + '/register-employee', (req, res) => {
 
             db.one('SELECT employees.username, employees.employeeid, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = hospitals.hospitalid WHERE username = $1', [username]).then(result => {
 
-                let hospitalid = result.hospitalid;
                 let hospitalname = result.hospitalname;
+                let hospitalid = result.hospitalid;
 
                 let username = result.username;
                 let employeeid = result.employeeid;
@@ -137,8 +137,8 @@ app.post(HOSPITAL_PARAMS + '/register-employee', (req, res) => {
 });
 
 app.post(HOSPITAL_PARAMS + '/log-in-employee', (req, res) => {
+    
     let hospitalname = req.params.hospitalname;
-    let hospitalid = req.params.hospitalid
     
     let username = req.body.username;
     let password = req.body.password;
@@ -159,8 +159,8 @@ app.post(HOSPITAL_PARAMS + '/log-in-employee', (req, res) => {
         if (errorType === 'QueryResultError') {
             db.one('SELECT hospitalid, hospitalname, address, city, state, zipcode, telephone FROM hospitals WHERE hospitalname = $1', [hospitalname]).then(hospital => {
 
-                let hospitalname = hospital.hospitalname
-                let hospitalid = hospital.hospitalid
+                let hospitalname = hospital.hospitalname;
+                let hospitalid = hospital.hospitalid;
                 res.redirect('/' + hospitalname + '/' + hospitalid + '/home');
             });
         } else {
@@ -179,23 +179,21 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/home',(req, res) => {
     db.any('SELECT patients.firstname, patients.lastname, patients.dob, patients.sex, hospitals.hospitalid FROM patients INNER JOIN hospitals ON hospitals.hospitalid = $1', [hospitalid]).then(patients => {
         res.render('employee-home', {patients : patients, hospitalname : hospitalname, hospitalid : hospitalid, username : username, employeeid : employeeid});
     }).catch(e => {
-        console.log(e)
+        console.log(e);
     });
 });
 
 app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/new-patient', (req, res) => {
 
     let employeeid = req.params.employeeid;
-    console.log(employeeid)
+
     db.one('SELECT employees.username, employees.employeeid, employees.hospitalid, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = hospitals.hospitalid WHERE employees.employeeid = $1', [employeeid]).then(result => {
-        console.log(employeeid)
         res.render('patients', {result : result, employeeid : employeeid});
     }).catch(e => {
-        console.log(e)
-    })
-    
-    
-})
+        console.log(e);
+    });
+});
+
 app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
 
     let hospitalname = req.params.hospital;
@@ -203,51 +201,53 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
     let username = req.params.username;
     let employeeid = req.params.employeeid;
     
-    let admissiondate = req.body.admissiondate
+    let admissiondate = req.body.admissiondate;
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
     let dob = req.body.dob;
     let sex = req.body.sex;
-    let maritalstatus = req.body.maritalstatus
-    let countryofbirth = req.body.countryofbirth
+    let maritalstatus = req.body.maritalstatus;
+    let countryofbirth = req.body.countryofbirth;
     let address = req.body.address;
     let city = req.body.city;
     let state = req.body.state;
     let zipcode = req.body.zipcode;
-    let telephone = req.body.telephone
-    let email = req.body.email
-    let religion = req.body.religion
-    let citizen = req.body.citizen
+    let telephone = req.body.telephone;
+    let email = req.body.email;
+    let religion = req.body.religion;
+    let citizen = req.body.citizen;
     let reasonforvisit = req.body.reasonforvisit;
     let medication = req.body.medication;
     let drugallergies = req.body.drugallergies;
     let roomnumber = req.body.roomnumber;
     let dischargedate = req.body.dischargedate;
-    let surgical = req.body.surgical
-    let medical = req.body.medical
-    let psychiatric = req.body.letpsychiatric
-    let admissiontype = req.body.admissiontype
-    let communication = req.body.communication
-    let vision = req.body.vision
-    let hearing = req.body.hearing
-    let assistivedevices = req.body.assistivedevices
-    let toileting = req.body.toileting
-    let medicationadministration = req.body.medicationadministration
-    let feeding = req.body.feeding
-    let diettexture = req.body.diettexture
-    let ambulation = req.body.ambulation
-    let personalhygiene = req.body.personalhygiene
-    let oralhygiene = req.body.oralhygiene
-    let headofbedelevated = req.body.headofbedelevated
-    let additionalnotes = req.body.additionalnotes
-    let diagnosis = req.body.diagnosis
-    let operations = req.body.operations
+    let surgical = req.body.surgical;
+    let medical = req.body.medical;
+    let psychiatric = req.body.letpsychiatric;
+    let admissiontype = req.body.admissiontype;
+    let communication = req.body.communication;
+    let vision = req.body.vision;
+    let hearing = req.body.hearing;
+    let assistivedevices = req.body.assistivedevices;
+    let toileting = req.body.toileting;
+    let medicationadministration = req.body.medicationadministration;
+    let feeding = req.body.feeding;
+    let diettexture = req.body.diettexture;
+    let ambulation = req.body.ambulation;
+    let personalhygiene = req.body.personalhygiene;
+    let oralhygiene = req.body.oralhygiene;
+    let headofbedelevated = req.body.headofbedelevated;
+    let additionalnotes = req.body.additionalnotes;
+    let diagnosis = req.body.diagnosis;
+    let operations = req.body.operations;
+    let bloodtype = req.body.bloodtype;
+    let ethnicity = req.body.ethnicity;
 
-    db.one('INSERT INTO patients(admissiondate, firstname, lastname, dob, sex, maritalstatus, countryofbirth, address, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40)', [admissiondate, firstname, lastname, dob, sex, maritalstatus, address, countryofbirth, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations]).then(() => {
+    db.one('INSERT INTO patients(admissiondate, firstname, lastname, dob, sex, maritalstatus, countryofbirth, address, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations, bloodtype, ethnicity) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42)', [admissiondate, firstname, lastname, dob, sex, maritalstatus, address, countryofbirth, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations, bloodtype, ethnicity]).then(() => {
 
         res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/home');
     }).catch(e => {
-        console.log(e)
+        console.log(e);
     });
 });
 
@@ -261,7 +261,7 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/patient-info', (req, r
     db.one('SELECT * FROM patients WHERE hospitals.hospitalid = patients.hospitalid AND patients.patientid = $2', [hospitalid, patientid]).then(patient => {
         res.render('patient-info', {patient : patient});
     }).catch(e => {
-        console.log(e)
+        console.log(e);
     });
 });
 
@@ -270,7 +270,7 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/patient-info', (req, re
     db.one('SELECT * FROM patients WHERE patientid = $1', [patientid]).then(patient => {
         res.render('patient-info', {patient : patient});
     }).catch(e => {
-        console.log(e)
+        console.log(e);
     });
 })
 
@@ -282,50 +282,52 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res)
     let employeeid = req.params.employeeid;
     let patientid = req.params.patientid;
     
-    let admissiondate = req.body.admissiondate
+    let admissiondate = req.body.admissiondate;
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
     let dob = req.body.dob;
     let sex = req.body.sex;
-    let maritalstatus = req.body.maritalstatus
-    let countryofbirth = req.body.countryofbirth
+    let maritalstatus = req.body.maritalstatus;
+    let countryofbirth = req.body.countryofbirth;
     let address = req.body.address;
     let city = req.body.city;
     let state = req.body.state;
     let zipcode = req.body.zipcode;
-    let telephone = req.body.telephone
-    let email = req.body.email
-    let religion = req.body.religion
-    let citizen = req.body.citizen
+    let telephone = req.body.telephone;
+    let email = req.body.email;
+    let religion = req.body.religion;
+    let citizen = req.body.citizen;
     let reasonforvisit = req.body.reasonforvisit;
     let medication = req.body.medication;
     let drugallergies = req.body.drugallergies;
     let roomnumber = req.body.roomnumber;
     let dischargedate = req.body.dischargedate;
-    let surgical = req.body.surgical
-    let medical = req.body.medical
-    let psychiatric = req.body.letpsychiatric
-    let admissiontype = req.body.admissiontype
-    let communication = req.body.communication
-    let vision = req.body.vision
-    let hearing = req.body.hearing
-    let assistivedevices = req.body.assistivedevices
-    let toileting = req.body.toileting
-    let medicationadministration = req.body.medicationadministration
-    let feeding = req.body.feeding
-    let diettexture = req.body.diettexture
-    let ambulation = req.body.ambulation
-    let personalhygiene = req.body.personalhygiene
-    let oralhygiene = req.body.oralhygiene
-    let headofbedelevated = req.body.headofbedelevated
-    let additionalnotes = req.body.additionalnotes
-    let diagnosis = req.body.diagnosis
-    let operations = req.body.operations
+    let surgical = req.body.surgical;
+    let medical = req.body.medical;
+    let psychiatric = req.body.letpsychiatric;
+    let admissiontype = req.body.admissiontype;
+    let communication = req.body.communication;
+    let vision = req.body.vision;
+    let hearing = req.body.hearing;
+    let assistivedevices = req.body.assistivedevices;
+    let toileting = req.body.toileting;
+    let medicationadministration = req.body.medicationadministration;
+    let feeding = req.body.feeding;
+    let diettexture = req.body.diettexture;
+    let ambulation = req.body.ambulation;
+    let personalhygiene = req.body.personalhygiene;
+    let oralhygiene = req.body.oralhygiene;
+    let headofbedelevated = req.body.headofbedelevated;
+    let additionalnotes = req.body.additionalnotes;
+    let diagnosis = req.body.diagnosis;
+    let operations = req.body.operations;
+    let bloodtype = req.body.bloodtype;
+    let ethnicity = req.body.ethnicity;
 
-    db.one('UPDATE patients SET admissiondate = $1, firstname = $2, lastname = $3, dob = $4, sex = $5, maritalstatus = $6, countryofbirth = $7, address = $8, city = $9, state = $10, zipcode = $11, telephone = $12, email = $13, religion = $14, citizen = $15, reasonforvisit = $16, medication = $17, drugallergies = $18, roomnumber = $19, hospitalid = $20, dischargedate = $21, surgical = $22, medical = $23, psychiatric = $24, admissiontype = $25, communication = $26, vision = $27, hearing = $28, assistivedevices = $29, toileting = $30, medicationadministration = $31, feeding = $32, diettexture = $33, ambulation = $34, personalhygiene = $35, oralhygiene = $36, headofbedelevated = $37, additionalnotes = $38, diagnosis = $39, operations = $40 WHERE patientid = $41', [admissiondate, firstname, lastname, dob, sex, maritalstatus, address, countryofbirth, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations]).then(() => {
+    db.one('UPDATE patients SET admissiondate = $1, firstname = $2, lastname = $3, dob = $4, sex = $5, maritalstatus = $6, countryofbirth = $7, address = $8, city = $9, state = $10, zipcode = $11, telephone = $12, email = $13, religion = $14, citizen = $15, reasonforvisit = $16, medication = $17, drugallergies = $18, roomnumber = $19, hospitalid = $20, dischargedate = $21, surgical = $22, medical = $23, psychiatric = $24, admissiontype = $25, communication = $26, vision = $27, hearing = $28, assistivedevices = $29, toileting = $30, medicationadministration = $31, feeding = $32, diettexture = $33, ambulation = $34, personalhygiene = $35, oralhygiene = $36, headofbedelevated = $37, additionalnotes = $38, diagnosis = $39, operations = $40, bloodtype = $41, ethnicity = $42 WHERE patientid = $43', [admissiondate, firstname, lastname, dob, sex, maritalstatus, countryofbirth, address, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations, bloodtype, ethnicity, patientid]).then(() => {
         res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/:patientid/patient-info');
     }).catch(e => {
-        console.log(e)
+        console.log(e);
     })
 })
 
