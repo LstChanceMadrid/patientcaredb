@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const pgp = require('pg-promise')();
 const connectionString = "postgres://fmngwkmfyfhdxv:fa0290f880e479e8b59d5c6ce5a8b7d745aed09ca2ca2f26c8da42c56e6a231d@ec2-107-22-164-225.compute-1.amazonaws.com:5432/damvt1g6umvmn4?ssl=true";
 const db = pgp(connectionString);
+const request = require('request');
 const session = require('express-session');
 const sess = {secret: 'keyboard cat', resave: false, saveUninitialized: false};
 const port = 3000;
@@ -12,6 +13,7 @@ const port = 3000;
 
 const HOSPITAL_PARAMS = '/:hospitalname/:hospitalid';
 const EMPLOYEE_PARAMS = '/:username/:employeeid';
+
 
 // access to main.css file
 app.use('/styles', express.static('styles'));
@@ -23,6 +25,7 @@ app.engine('mustache', mustacheExpress());
 
 app.set('views', "./views"); 
 app.set('view engine', 'mustache');
+
 
 
 // hospital login page
@@ -188,13 +191,27 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/new-patient', (req, res) => {
     let employeeid = req.params.employeeid;
 
     db.one('SELECT employees.username, employees.employeeid, employees.hospitalid, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = hospitals.hospitalid WHERE employees.employeeid = $1', [employeeid]).then(result => {
-        res.render('patients', {result : result, employeeid : employeeid});
+        const countryname = [];
+
+        // countries api
+        request('https://restcountries.eu/rest/v2/all', (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                let info = JSON.parse(body)
+                    console.log(info[0].name)
+                for (index in info) {
+                    countryname.push({name : info[index].name})
+                };
+            };
+            
+            res.render('patients', {result : result, employeeid : employeeid, countryname : countryname});
+        });
     }).catch(e => {
         console.log(e);
     });
 });
 
 app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
+
 
     let hospitalname = req.params.hospital;
     let hospitalid = req.params.hospitalid;
