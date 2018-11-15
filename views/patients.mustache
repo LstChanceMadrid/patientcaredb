@@ -25,20 +25,17 @@
 <form id="addNewPatient" action="/{{result.hospitalname}}/{{result.hospitalid}}/{{result.username}}/{{result.employeeid}}/admit-patient" method="POST">
     
     
-  
-    
-<form>
-   
+
     
     
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputAddress">First Name</label>
-      <input type="text" class="form-control" placeholder="First">
+      <input name="firstname" type="text" class="form-control" placeholder="First">
     </div>
     <div class="form-group col-md-6">
       <label for="inputAddress">Last Name</label>
-      <input type="text" class="form-control" placeholder="Last">
+      <input name="lastname" type="text" class="form-control" placeholder="Last">
     </div>
   </div>
   <div class="form-group">
@@ -52,7 +49,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity">
+      <input name="city" type="text" class="form-control" id="inputCity">
     </div>
     <div class="form-group col-md-4">
       <label for="inputState">State</label>
@@ -116,16 +113,12 @@
       <input type="text" class="form-control" id="inputZip">
     </div>
   </div>
-</form>
 
 
-
-    
-    
 
 <div class="form-group">
     <label for="exampleFormControlSelect1">Sex</label>
-    <select class="form-control" id="exampleFormControlSelect1">
+    <select name="sex" class="form-control" id="exampleFormControlSelect1">
         <option disabled selected>Select</option>
         <option value="sex">Male</option>
         <option value="sex">Female</option>
@@ -456,7 +449,7 @@
     
 <div class="form-group">
     <label for="exampleFormControlTextarea1">Date of Birth</label>
-    <input type="date" class="form-control" id="exampleFormControlTextarea1" rows="3" name="admissiondate"/>
+    <input type="date" class="form-control" id="exampleFormControlTextarea1" rows="3" name="dob"/>
 </div>
     
     
@@ -467,12 +460,11 @@
     
 <div class="form-group">
     <label for="exampleFormControlTextarea1">Discharge Date</label>
-    <input type="date" class="form-control" id="exampleFormControlTextarea1" rows="3" name="admissiondate"/>
+    <input type="date" class="form-control" id="exampleFormControlTextarea1" rows="3" name="dischargedate"/>
 </div>
     
    <br>
 
-<form>
   <div class="form-group">
     <label for="formGroupExampleInput">Medication</label>
     <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
@@ -524,15 +516,7 @@
   <div class="form-group">
     <label for="formGroupExampleInput">Medical Administration</label>
     <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
-  </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput2">Patient ID</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-  </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput">Hospital ID</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
-  </div>
+    </div>
   <div class="form-group">
     <label for="formGroupExampleInput2">Operations</label>
     <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
@@ -569,8 +553,8 @@
     <label for="formGroupExampleInput2">Vision</label>
     <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
   </div>
-</form>
-    <input id="postBtn" type="submit" value="Post"/>
+    
+<input id="postBtn" type="submit" value="Post"/>
 </form>
 
 </body>
