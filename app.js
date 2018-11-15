@@ -211,7 +211,7 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/new-patient', (req, res) => {
 });
 
 app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
-
+    console.log('hello')
     let hospitalname = req.params.hospital;
     let hospitalid = req.params.hospitalid;
     let username = req.params.username;
