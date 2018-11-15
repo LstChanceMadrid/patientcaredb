@@ -78,7 +78,7 @@ app.post('/log-in-hospital', (req, res) => {
             res.redirect('..');
         } else {
             console.log(e);
-        }
+        };
     });
 });
 
@@ -135,7 +135,7 @@ app.post(HOSPITAL_PARAMS + '/register-employee', (req, res) => {
             });
         } else {
             console.log(e);
-        }
+        };
     });
 });
 
@@ -168,7 +168,7 @@ app.post(HOSPITAL_PARAMS + '/log-in-employee', (req, res) => {
             });
         } else {
             console.log(e);
-        }
+        };
     });
 });
 
@@ -196,13 +196,12 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/new-patient', (req, res) => {
         // countries api
         request('https://restcountries.eu/rest/v2/all', (error, response, body) => {
             if (!error && response.statusCode == 200) {
-                let info = JSON.parse(body)
-                    console.log(info[0].name)
+                let info = JSON.parse(body);
+                
                 for (index in info) {
-                    countryname.push({name : info[index].name})
+                    countryname.push({name : info[index].name});
                 };
             };
-            
             res.render('patients', {result : result, employeeid : employeeid, countryname : countryname});
         });
     }).catch(e => {
@@ -211,7 +210,6 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/new-patient', (req, res) => {
 });
 
 app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
-
 
     let hospitalname = req.params.hospital;
     let hospitalid = req.params.hospitalid;
@@ -268,28 +266,25 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
     });
 });
 
-app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/patient-info', (req, res) => {
-    let hospitalname = req.params.hospital;
-    let hospitalid = req.params.hospitalid;
-    let username = req.params.username;
-    let employeeid = req.params.employeeid;
-    let patientid = req.params.patientid;
+// app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/patient-info', (req, res) => {
+//     let hospitalid = req.params.hospitalid;
+//     let patientid = req.params.patientid;
     
-    db.one('SELECT * FROM patients WHERE hospitals.hospitalid = patients.hospitalid AND patients.patientid = $2', [hospitalid, patientid]).then(patient => {
-        res.render('patient-info', {patient : patient});
-    }).catch(e => {
-        console.log(e);
-    });
-});
+//     db.one('SELECT * FROM patients WHERE hospitals.hospitalid = patients.hospitalid AND patients.patientid = $2', [hospitalid, patientid]).then(patient => {
+//         res.render('patient-info', {patient : patient});
+//     }).catch(e => {
+//         console.log(e);
+//     });
+// });
 
 app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/patient-info', (req, res) => {
-
+    let patientid = req.params.patientid;
     db.one('SELECT * FROM patients WHERE patientid = $1', [patientid]).then(patient => {
         res.render('patient-info', {patient : patient});
     }).catch(e => {
         console.log(e);
     });
-})
+});
 
 app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res) => {
     
