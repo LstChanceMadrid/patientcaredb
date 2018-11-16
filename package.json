@@ -12,6 +12,7 @@
   "dependencies": {
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
+    "d3.chart": "^0.3.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "mustache-express": "^1.2.8",

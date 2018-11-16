@@ -6,27 +6,40 @@
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <title></title>
+        <title>Services</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <link rel="stylesheet" type="text/css" href="" />
-    </head>
+        <link rel="stylesheet" href='style/style.css'/>
+        <link rel="stylesheet" media='screen and (min-width: 200px) and (max-width: 780px)' href='style/moblie.css' />
 
-    <body>
-        <header>
-        </header>heyyyyyy
-        <form action="/{{hospitalname}}/{{hospitalid}}/{{username}}/{{employeeid}}/new-patient" method="GET">
-            
+      </head>
+
+        <!-- <form action="/{{hospitalname}}/{{hospitalid}}/{{username}}/{{employeeid}}/new-patient" method="GET">
+
             <input type="submit" value="New Patient" />
-        </form>
+        </form> -->
 
-        <main>
-        </main>
 
-        <footer>
-        </footer>
-    </body>
+      <body class="main-nav-background clearfix overflowfix">
+        <header class="dashboard">Dashboard</header>
+      <section class="main-nav-container">
+      <p><a href="#"><img src="style/new_patient2.jpg" alt="new patient"></a></p>
+      <p><a href="#"><img src="style/treatment2.jpg" alt="treatments"></a></p>
+      </section>
+
+      <section class="card clearfix overflowfix">
+
+        <div class="date-container">
+        <div class="date" id="printDay"></div>
+        <div class="date" id="printDate"></div>
+        <div class="date" id="printTime"></div>
+      </div>
+      </section>
+
+      </body>
+
+
 
     <script src=""></script>
 </html>
