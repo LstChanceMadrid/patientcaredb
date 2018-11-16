@@ -1,10 +1,17 @@
 html {
-    margin-left: 15%;
-    margin-right: 15%;
-    margin-top: 5%;
+    margin: 5% 15% 5% 15%;
     font-family: serif;
+    background-color: aqua;
 }
 
 input {
     margin-left: 3%;
+}
+
+form {
+   background-color: aqua; 
+}
+
+#body {
+    background-color: aqua;
 }
