@@ -203,7 +203,7 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/home',(req, res) => {
 
     // grabs all the patients correlating to the hospital
     db.any('SELECT patients.firstname, patients.lastname, patients.dob, patients.sex, patients.hospitalid, hospitals.hospitalid FROM patients INNER JOIN hospitals ON hospitals.hospitalid = $1 WHERE patients.hospitalid = $1', [hospitalid]).then(patients => {
-        console.log(employeeid)
+
         res.render('employee-home', {patients : patients, hospitalname : hospitalname, hospitalid : hospitalid, username : username, employeeid : employeeid});
     }).catch(e => {
         console.log(e);
@@ -242,7 +242,6 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/new-patient', (req, res) => {
 
 app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
 
-    let hospitalname = req.params.hospital;
     let hospitalid = req.params.hospitalid;
     let username = req.params.username;
     let employeeid = req.params.employeeid;
@@ -291,7 +290,7 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
 
     // puts the patients into the database
     db.none('INSERT INTO patients(admissiondate, firstname, lastname, dob, sex, maritalstatus, countryofbirth, address, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations, bloodtype, ethnicity) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42)', [admissiondate, firstname, lastname, dob, sex, maritalstatus, address, countryofbirth, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations, bloodtype, ethnicity]).then(() => {
-
+        let hospitalname = req.params.hospitalname;
         res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/home');
     }).catch(e => {
         console.log(e);
