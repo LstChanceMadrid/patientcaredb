@@ -53,6 +53,11 @@
   z-index: -1;
   }
 
+  .hospital-frame{
+  background-color: #ff4747;
+
+  }
+
 #full{
 
 display: flex;
