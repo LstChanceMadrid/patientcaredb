@@ -9,8 +9,8 @@
         <title>Index</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" type="text/css" href="../styles/main.css" />
-        <link rel="stylesheet" media='screen and (min-width: 200px) and (max-width: 780px)' href='../styles/moblie.css' />
+        <link rel="stylesheet" type="text/css" href="/styles/main.css" />
+        <link rel="stylesheet" media='screen and (min-width: 200px) and (max-width: 780px)' href='/styles/moblie.css' />
     </head>
 
     <body>
@@ -83,7 +83,7 @@
 
 
       <div class="background-frame hospital-frame">
-      <img class="main-background hospital-background"  src="style/hospital-home.jpg" alt="main image">
+      <img class="main-background hospital-background"  src="/style/hospital-home.jpg" alt="main image">
       </div>
 
       <label class="modal-btn" for="modal-toggle">Start Here</label>
@@ -102,11 +102,17 @@
                 <input class="radio" id="tab-1" name="tabs-name" type="radio" checked>
                 <label for="tab-1" class="table"><span>Login</span></label>
                 <div class="tabs-content">
-                   <form action="">
-                       <input type="email" placeholder="Email" required>
-                       <input type="password" placeholder="Password" required>
-                       <input type="submit" value="Log In">
-                   </form>
+                  <form action="/{{hospital.hospitalname}}/{{hospital.hospitalid}}/log-in-employee" method="POST">
+                      <label class="credential-label">Log In:</label>
+
+                      <input class="credential-input" type="text" name="username" placeholder="Username" autofocus required />
+
+                      <input class="credential-input" type="password" name="password" placeholder="Password" required />
+
+                      <input type="submit" value="Log In" />
+
+                      {{employeeExistsFalse}}
+                  </form>
                    <form class="forgot-password" action="">
                        <input id="forgot-password-toggle" type="checkbox">
                        <label for="forgot-password-toggle">forgot password?</label>
