@@ -93,9 +93,9 @@
                 <input class="radio" id="tab-1" name="tabs-name" type="radio" checked>
                 <label for="tab-1" class="table"><span>Login</span></label>
                 <div class="tabs-content">
-                   <form action="">
-                       <input type="email" placeholder="Email" required>
-                       <input type="password" placeholder="Password" required>
+                   <form action="/log-in-hospital" method="POST">
+                       <input type="text" name="hospitalname" placeholder="Hospital" required>
+                       <input type="password" name="accesscode" placeholder="Password" required>
                        <input type="submit" value="Log In">
                    </form>
                    <form class="forgot-password" action="">
@@ -112,11 +112,36 @@
                 <label for="tab-2" class="table"><span>Sign up</span></label>
                 <div class="tabs-content">
 
-                   <form action="">
+                   <form action="/register-hospital" method="POST">
+                   
+
+                    <input type="text" name="hospitalname" placeholder="Hospital Name" required />
+
+
+                    <input type="password" name="accesscode" placeholder="Access Code" required /><br />
+                    
+
+
+                    <input type="text" name="address" placeholder="Address" required />
+
+
+                    <input type="text" name="city" placeholder="City" required />
+
+                    <input type="text" name="state" placeholder="State" required />
+
+
+                    <input type="number" name="zipcode" min="10000" max="99999" placeholder="Zipcode" required />
+
+
+                    <input type="tel" name="telephone" placeholder="555-555-5555" required />
+
+                    <input type="submit" value="Register" />
+                    <input type="reset" /> 
+                    <!--
                        <input type="email" placeholder="Email" required>
                        <input type="password" placeholder="Password" required>
                        <input type="password" placeholder="Confirm password" required>
-                       <input type="submit" value="Sign Up">
+                       <input type="submit" value="Sign Up">-->
                    </form>
                 </div>
             </div>
