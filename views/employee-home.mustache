@@ -10,8 +10,9 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <link rel="stylesheet" href='styles/style.css'/>
-        <link rel="stylesheet" media='screen and (min-width: 200px) and (max-width: 780px)' href='styles/moblie.css' />
+        <link rel="stylesheet" href='/styles/main.css'/>
+        
+        <link rel="stylesheet" media='screen and (min-width: 200px) and (max-width: 780px)' href='/styles/moblie.css' />
 
       </head>
 
@@ -24,8 +25,8 @@
       <body class="main-nav-background clearfix overflowfix">
         <header class="dashboard">Dashboard</header>
       <section class="main-nav-container">
-      <p><a href="#"><img src="style/new_patient2.jpg" alt="new patient"></a></p>
-      <p><a href="#"><img src="style/treatment2.jpg" alt="treatments"></a></p>
+      <p><a href="/{{hospitalname}}/{{hospitalid}}/{{username}}/{{employeeid}}/new-patient"><img src="/styles/new_patient2.jpg" alt="new patient"></a></p>
+      <p><a href="#"><img src="/styles/treatment2.jpg" alt="treatments"></a></p>
       </section>
 
       <section class="card clearfix overflowfix">
@@ -35,11 +36,15 @@
         <div class="date" id="printDate"></div>
         <div class="date" id="printTime"></div>
       </div>
+      {{#patients}}
+      {{firstname}}
+      {{lastname}}
+      {{/patients}}
       </section>
 
       </body>
 
 
 
-    <script src=""></script>
+    <script src="/scripts/home.js"></script>
 </html>
