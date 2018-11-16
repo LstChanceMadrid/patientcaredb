@@ -158,12 +158,13 @@ app.post(HOSPITAL_PARAMS + '/register-employee', (req, res) => {
 app.post(HOSPITAL_PARAMS + '/log-in-employee', (req, res) => {
     
     let hospitalname = req.params.hospitalname;
-    
+    let hospitalid = req.params.hospitalid;
+
     let username = req.body.username;
     let password = req.body.password;
 
     // checks that the username exists and correlating password is valid
-    db.one('SELECT employees.employeeid, employees.username, employees.password, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = hospitals.hospitalid WHERE employees.username = $1 AND employees.password = $2', [username, password]).then(result => {
+    db.one('SELECT employees.employeeid, employees.username, employees.password, employees.hospitalid, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = $1 AND hospitals.hospitalid = $1 WHERE employees.username = $2 AND employees.password = $3', [hospitalid, username, password]).then(result => {
 
         let hospitalname = result.hospitalname;
         let hospitalid = result.hospitalid;
@@ -201,7 +202,8 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/home',(req, res) => {
     let employeeid = req.params.employeeid;
 
     // grabs all the patients correlating to the hospital
-    db.any('SELECT patients.firstname, patients.lastname, patients.dob, patients.sex, hospitals.hospitalid FROM patients INNER JOIN hospitals ON hospitals.hospitalid = $1', [hospitalid]).then(patients => {
+    db.any('SELECT patients.firstname, patients.lastname, patients.dob, patients.sex, patients.hospitalid, hospitals.hospitalid FROM patients INNER JOIN hospitals ON hospitals.hospitalid = $1 WHERE patients.hospitalid = $1', [hospitalid]).then(patients => {
+        console.log(employeeid)
         res.render('employee-home', {patients : patients, hospitalname : hospitalname, hospitalid : hospitalid, username : username, employeeid : employeeid});
     }).catch(e => {
         console.log(e);
