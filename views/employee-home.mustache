@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <link rel="stylesheet" href='/styles/main.css'/>
-        
+
         <link rel="stylesheet" media='screen and (min-width: 200px) and (max-width: 780px)' href='/styles/moblie.css' />
 
       </head>
@@ -29,7 +29,7 @@
       <p><a href="#"><img src="/styles/treatment2.jpg" alt="treatments"></a></p>
       </section>
 
-      <section class="card clearfix overflowfix">
+      <section class="patient-card clearfix overflowfix">
 
         <div class="date-container">
         <div class="date" id="printDay"></div>
@@ -38,7 +38,7 @@
       </div>
       {{#patients}}
       {{firstname}}
-      {{lastname}}
+      {{lastname}},
       {{/patients}}
       </section>
 
