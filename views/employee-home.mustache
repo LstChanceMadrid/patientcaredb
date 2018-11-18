@@ -14,37 +14,32 @@
 
         <link rel="stylesheet" media='screen and (min-width: 200px) and (max-width: 780px)' href='/styles/moblie.css' />
 
-      </head>
+    </head>
 
-        <!-- <form action="/{{hospitalname}}/{{hospitalid}}/{{username}}/{{employeeid}}/new-patient" method="GET">
+	<body class="main-nav-background clearfix overflowfix">
+		<header class="dashboard">&nbsp;&nbsp;&nbsp;Dashboard</header>
 
-            <input type="submit" value="New Patient" />
-        </form> -->
+		<section class="main-nav-container">
+			<p><a href="/{{hospitalname}}/{{hospitalid}}/{{username}}/{{employeeid}}/new-patient"><img src="/styles/new_patient2.jpg" alt="new patient"></a></p>
 
+			<p><a href="#"><img src="/styles/treatment2.jpg" alt="treatments"></a></p>
+		</section>
 
-      <body class="main-nav-background clearfix overflowfix">
-        <header class="dashboard">&nbsp;&nbsp;&nbsp;Dashboard</header>
-      <section class="main-nav-container">
-      <p><a href="/{{hospitalname}}/{{hospitalid}}/{{username}}/{{employeeid}}/new-patient"><img src="/styles/new_patient2.jpg" alt="new patient"></a></p>
-      <p><a href="#"><img src="/styles/treatment2.jpg" alt="treatments"></a></p>
-      </section>
+		<section class="patient-card clearfix overflowfix">
+			<div class="date-container">
+				<div class="date" id="printDay"></div>
+			
+				<div class="date" id="printDate"></div>
+			
+				<div class="date" id="printTime"></div>
+			</div>
 
-      <section class="patient-card clearfix overflowfix">
-
-        <div class="date-container">
-        <div class="date" id="printDay"></div>
-        <div class="date" id="printDate"></div>
-        <div class="date" id="printTime"></div>
-        </div>
-      {{#patients}}
-      {{firstname}}
-      {{lastname}},
-      {{/patients}}
-      </section>
-
-      </body>
-
-
+			{{#patients}}
+			{{firstname}}
+			{{lastname}},
+			{{/patients}}
+		</section>
+	</body>
 
     <script src="/scripts/home.js"></script>
 </html>
