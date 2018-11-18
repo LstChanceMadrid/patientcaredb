@@ -23,7 +23,7 @@
 
 
       <body class="main-nav-background clearfix overflowfix">
-        <header class="dashboard">Dashboard</header>
+        <header class="dashboard">&nbsp;&nbsp;&nbsp;Dashboard</header>
       <section class="main-nav-container">
       <p><a href="/{{hospitalname}}/{{hospitalid}}/{{username}}/{{employeeid}}/new-patient"><img src="/styles/new_patient2.jpg" alt="new patient"></a></p>
       <p><a href="#"><img src="/styles/treatment2.jpg" alt="treatments"></a></p>
@@ -36,10 +36,13 @@
         <div class="date" id="printDate"></div>
         <div class="date" id="printTime"></div>
       </div>
-      {{#patients}}
-      {{firstname}}
-      {{lastname}}
-      {{/patients}}
+      <div id="ptName">
+          {{#patients}}
+          {{firstname}}
+          {{lastname}}<br/><hr/>
+          {{admissionDate}}
+          {{/patients}}
+      </div>
       </section>
 
       </body>
