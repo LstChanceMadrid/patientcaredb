@@ -513,7 +513,11 @@ opacity: .4;
     }
     #printTime {
       color: #54515e;
+}
 
+#ptName {
+    padding-left: 2%;
+    padding-top: 2%;
 }
 
 
