@@ -74,6 +74,7 @@ opacity: .9;
  min-height: 100vh;
  display: flex;
  justify-content: space-between;
+ margin-top: -40%;
  margin-left: 2%;
  margin-right: 2%;
 }
@@ -83,6 +84,7 @@ opacity: .9;
  border-radius: 15px;
  padding: 0 0 50px 0
 }
+
 .card > header {
  height: 200px;
  border-radius:  7px 7px 0 0;
