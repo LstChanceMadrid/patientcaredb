@@ -625,3 +625,69 @@ height:100%;
 color: #FDEAE6;
 text-decoration: none;
 }
+
+
+/* =====  blood pressure */
+
+
+.Kool__Root{
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, .3);
+  margin-right: 2%;
+  width: 100%;
+  position: fixed;
+  top: 58%;
+  left: 16%;
+  clear: both;
+
+}
+#chartHolder{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-end;
+
+
+
+}
+.odd_pressure{
+ width:9px;
+ height:9px;
+ border-radius:100%;
+ background-color:#F49732;
+ box-sizing:border-box;
+}
+
+.high_blood_pressure{
+ border:solid 2px #F49732;
+ animation:high_blood_pressure 1.6s 0s ease-out infinite
+}
+
+@keyframes high_blood_pressure{
+ 0%{box-shadow:0 0 2px 1px rgba(244, 151, 50, 0), 0 0 0px 0px rgba(255, 255, 255, 0.5), 0 0 0px 0px rgba(244, 151, 50, 0);}
+ 10%{box-shadow:0 0 2px 1px rgba(244, 151, 50, 0.5), 0 0 3px 2px rgba(255, 255, 255, 0.5), 0 0 3px 4px rgba(244, 151, 50, 0.5);}
+ 100%{box-shadow:0 0 2px 1px rgba(244, 151, 50, 0), 0 0 0px 10px rgba(255, 255, 255, 0.5), 0 0 0px 10px rgba(244, 151, 50, 0);}
+}
+
+@-webkit-keyframes high_blood_pressure{
+ 0%{box-shadow:0 0 2px 1px rgba(244, 151, 50, 0), 0 0 0px 0px rgba(255, 255, 255, 0.5), 0 0 0px 0px rgba(244, 151, 50, 0);}
+ 10%{box-shadow:0 0 2px 1px rgba(244, 151, 50, 0.5), 0 0 3px 2px rgba(255, 255, 255, 0.5), 0 0 3px 4px rgba(244, 151, 50, 0.5);}
+ 100%{box-shadow:0 0 2px 1px rgba(244, 151, 50, 0), 0 0 0px 10px rgba(255, 255, 255, 0.5), 0 0 0px 10px rgba(244, 151, 50, 0);}
+}
+
+.low_blood_pressure{
+ background-color:#5587a2;
+ border:solid 2px #5587a2;
+ animation:low_blood_pressure 2s 0s ease-out infinite
+}
+
+@keyframes low_blood_pressure{
+ 0%{box-shadow:0 0 2px 1px rgba(85, 135, 162, 0), 0 0 0px 0px rgba(255, 255, 255, 0.5), 0 0 0px 0px rgba(85, 135, 162, 0);}
+ 10%{box-shadow:0 0 2px 1px rgba(85, 135, 162, 0.5), 0 0 3px 4px rgba(255, 255, 255, 0.5), 0 0 3px 4px rgba(85, 135, 162, 0.5);}
+ 100%{box-shadow:0 0 2px 1px rgba(85, 135, 162, 0), 0 0 0px 10px rgba(255, 255, 255, 0.5), 0 0 0px 10px rgba(85, 135, 162, 0);}
+}
+
+@-webkit-keyframes low_blood_pressure{
+ 0%{box-shadow:0 0 2px 1px rgba(85, 135, 162, 0), 0 0 0px 0px rgba(255, 255, 255, 0.5), 0 0 0px 0px rgba(85, 135, 162, 0);}
+ 10%{box-shadow:0 0 2px 1px rgba(85, 135, 162, 0.5), 0 0 3px 4px rgba(255, 255, 255, 0.5), 0 0 3px 4px rgba(85, 135, 162, 0.5);}
+ 100%{box-shadow:0 0 2px 1px rgba(85, 135, 162, 0), 0 0 0px 10px rgba(255, 255, 255, 0.5), 0 0 0px 10px rgba(85, 135, 162, 0);}
+}
