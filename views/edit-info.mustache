@@ -139,7 +139,7 @@
 					<div class="form-group col-md-6">
 						<label for="inputAddress">Email</label>
 
-						<input name="email" type="text" class="form-control" value="Email">
+						<input name="email" type="text" class="form-control" value="{{patient.email}}">
 					</div>
 				</div>  
 			
@@ -168,7 +168,7 @@
 				<div class="form-group">
 					<label for="exampleFormControlSelect1">Country</label> 
 
-					<select class="form-control" id="exampleFormControlSelect1" name="countryofbirth">
+					<select class="form-control" id="exampleFormControlSelect1" name="countryofbirth" value="{{patient.countryofbirth}}">
 						<option value="Afghanistan">Afghanistan</option>
 						<option value="Albania">Albania</option>
 						<option value="Algeria">Algeria</option>
@@ -414,7 +414,7 @@
 				<div class="form-group">
 					<label for="exampleFormControlSelect1">Marital Status</label>
 
-					<select class="form-control" name="maritalstatus" id="exampleFormControlSelect1">
+					<select class="form-control" name="maritalstatus" id="exampleFormControlSelect1" value="{{patient.maritalstatus}}">
 						<option disabled selected>Select</option>
 
 						<option type="text" value="single">Single<br>
@@ -434,7 +434,7 @@
 				<div class="form-group">
 					<label for="exampleFormControlSelect1">Blood Type</label>
 
-					<select class="form-control" id="exampleFormControlSelect1" name="bloodtype">
+					<select class="form-control" id="exampleFormControlSelect1" name="bloodtype" value="{{patient.bloodtype}}">
 						<option disabled selected>Select</option>
 						<option type="text" name="bloodtype" value="A-">A-<br>
 						<option type="text" name="bloodtype" value="A+">A+<br>
@@ -452,7 +452,7 @@
 				<div class="form-group">
 					<label for="exampleFormControlSelect1">Citizen</label>
 
-					<select class="form-control" id="exampleFormControlSelect1" name="citizen">
+					<select class="form-control" id="exampleFormControlSelect1" name="citizen" value="{{patient.citizen}}">
 						<option disabled selected>Select</option>
 
 						<option type="text" value="Yes">Yes</option>
@@ -464,154 +464,154 @@
 				<div class="form-group">
 					<label for="exampleFormControlTextarea1">Date of Birth</label>
 
-					<input type="date" class="form-control" id="exampleFormControlTextarea1" rows="3" name="dob" required/>
+					<input type="date" class="form-control" id="exampleFormControlTextarea1" rows="3" name="dob" value="{{patient.dob}}"required/>
 				</div>
 					
 					
 				<div class="form-group">
 					<label for="exampleFormControlTextarea1">Admission Date</label>
 
-					<input type="date" class="form-control" id="exampleFormControlTextarea1" rows="3" name="admissiondate" required/>
+					<input type="date" class="form-control" id="exampleFormControlTextarea1" rows="3" name="admissiondate" required value="{{patient.admissiondate}}"/>
 				</div>
 					
 				<div class="form-group">
 					<label for="exampleFormControlTextarea1">Additional Notes</label>
 
-					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="additionalnotes"></textarea>
+					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="additionalnotes" value="additionalnotes"></textarea>
 				</div>
 
 				
 				<div class="form-group">
 					<label for="exampleFormControlTextarea1">Reason for Visit</label>
 
-					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="reasonforvisit"></textarea>
+					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="reasonforvisit" value="reasonforvisit"></textarea>
 				</div><br><br><br>
 
 		
 				<div class="form-group">
 					<label for="formGroupExampleInput">Medication</label>
 
-					<input type="text" class="form-control" id="formGroupExampleInput" name="medication">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="medication" value="{{patient.medication}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Drug Allergies</label>
 				
-					<input name="drugallergies" type="text" class="form-control" id="formGroupExampleInput2">
+					<input name="drugallergies" type="text" class="form-control" id="formGroupExampleInput2" value="{{patient.drugallergies}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Patient Room Number</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput" name="roomnumber">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="roomnumber"value="{{patient.roomnumber}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Admission Type</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2" name="admissiontype">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="admissiontype" value="{{patient.admissiontype}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Ambulation</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput" name="ambulation">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="ambulation" value="{{patient.ambulation}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Assistive Devices</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2" name="assistivedevices">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="assistivedevices" value="{{patient.assistivedevices}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Communication</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput" name="communication">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="communication" value="{{patient.communication}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Diagnosis</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2" name="diagnosis">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="diagnosis" value="{{patient.diagnosis}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Feeding</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2" name="feeding">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="feeding" value="{{patient.feeding}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Hearing</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput" name="hearing">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="hearing" value="{{patient.hearing}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Medical</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2" name="medical">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="medical" value="{{patient.medical}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Medication Administration</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput" name="medicationadministration">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="medicationadministration" value="{{patient.drugallergies}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Operations</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2" name="operations">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="operations" value="{{patient.operations}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Oral Hygiene</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput" name="oralhygiene">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="oralhygiene" value="{{patient.oralhygiene}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Personal Hygiene</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2" name="personalhygiene">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="personalhygiene" value="{{patient.personalhygiene}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Psychiatric</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput" name="psychiatric">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="psychiatric" value="{{patient.psychiatric}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Religion</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2" name="religion">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="religion" value="{{patient.religion}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Surgical</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput" name="surgical">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="surgical" value="{{patient.surgical}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Toileting</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput" name="toileting">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="toileting" value="{{patient.toileting}}">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Vision</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2" name="vision">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="vision" value="{{patient.vision}}">
 				</div>
 					
 				<div class="form-group">
 					<label for="exampleFormControlSelect1">Head of Bed Elevated</label>
 				
-					<select class="form-control" id="exampleFormControlSelect1" name="headofbedelevated">
+					<select class="form-control" id="exampleFormControlSelect1" name="headofbedelevated" value="{{patient.headofbedelevated}}">
 						<option disabled selected>Select</option>
 
 						<option type="text" value="yes">Yes<br>
