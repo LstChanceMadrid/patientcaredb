@@ -14,6 +14,8 @@
 
         <link rel="stylesheet" media='screen and (min-width: 200px) and (max-width: 780px)' href='/styles/moblie.css' />
 
+        <link rel="stylesheet" href="https://www.koolchart.com/demo/KoolChart/Assets/Css/KoolChart.css"/>
+        <link rel="stylesheet" href="https://www.koolchart.com/demo/Samples/Web/sample.css"/>
       </head>
 
         <!-- <form action="/{{hospitalname}}/{{hospitalid}}/{{username}}/{{employeeid}}/new-patient" method="GET">
@@ -22,7 +24,7 @@
         </form> -->
 
 
-      <body class="main-nav-background clearfix overflowfix">
+      <body class="main-nav-background  ">
         <header class="dashboard">Dashboard</header>
       <section class="main-nav-container">
       <p><a href="/{{hospitalname}}/{{hospitalid}}/{{username}}/{{employeeid}}/new-patient"><img src="/styles/new_patient2.jpg" alt="new patient"></a></p>
@@ -41,10 +43,12 @@
       {{lastname}},
       {{/patients}}
       </section>
-
+      <div id="chartHolder" style="height:500px; width:41%;"></div>
+      <div id="full"></div>
       </body>
 
-
-
+    <script src="https://www.koolchart.com/demo/LicenseKey/codepen/KoolChartLicense.js"></script>
+    <script src="https://www.koolchart.com/demo/KoolChart/JS/KoolIntegration.js"></script>
+    <script src="/scripts/graph.js"></script>
     <script src="/scripts/home.js"></script>
 </html>

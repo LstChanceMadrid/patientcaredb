@@ -79,9 +79,8 @@ opacity: .9;
 
 .hospital-cards {
  min-height: 100vh;
- display: flex;
- justify-content: space-between;
-
+display: flex;
+justify-content: space-between;
 }
 .card {
  margin: 12px;
@@ -156,6 +155,8 @@ max-width: 100%;
   justify-content: space-evenly;
 }
 
+
+
 #full li{
 list-style: none;
 padding-left: 10%;
@@ -172,6 +173,7 @@ text-align: center;
 
 
 
+
 /*log in  */
 .modal-btn {
 	 padding: 3px;
@@ -184,6 +186,12 @@ text-align: center;
    top: 4%;
    left: 2%;
 }
+.modal-btn:hover {
+  color: #58A6FF ;
+  outline: solid #FF684B 5px;
+  transition: .7s;
+}
+
  #modal-toggle {
 	 display: none;
 }
@@ -418,7 +426,7 @@ text-align: center;
 .dashboard{
 height: 30%;
 background-color: #54515e;
-font-size: 1em;
+font-size: 1.7em;
 color: #eeedf2;
 padding-top: 15px;
 padding-bottom: 15px;
@@ -428,19 +436,6 @@ box-shadow: 10px 10px 15px rgba(0, 0, 0, .3);
 
 
 
-
-.patient-card{
-  width: 300px;
-  height: 200px;
-  background-color: #faf9fc;
-  border-radius: 10%;
-  box-shadow: 10px 10px 15px rgba(0, 0, 0, .3);
-  float: right;
-  position: absolute;
-  top: 25%;
-  right: 5%;
-
-}
 
 .clearfix{
   clear: both;
@@ -452,10 +447,14 @@ box-shadow: 10px 10px 15px rgba(0, 0, 0, .3);
 
 .main-nav-container{
   float: left;
-  width: 50%;
+  width: 45%;
   position: relative;
-  margin-left: 5%
+  margin-left: 4%
 
+}
+
+.main-nav-container p{
+  margin-bottom: 10%;
 }
 
 .main-nav-container img{
@@ -483,17 +482,31 @@ opacity: .4;
 
 
 /* populate dash */
+.patient-card {
+  width: 40%;
+  height: 26%;
+  background-color: #faf9fc;
+  border-radius: 10%;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, .3);
+  float: right;
+  position: absolute;
+  margin-top: 1%;
+  right: 3%;
+
+}
+
 
 .date-container {
   font-family: 'Lato', sans-serif;
-  padding-top: 3%;
+  padding-top: 5%;
+  padding-bottom: 3%;
   background-color: #ff4747;
   border-radius: 2%;
   display: flex;
 
 }
   .date {
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: 500;
     font-family: 'Lato', sans-serif;
 
@@ -600,4 +613,68 @@ height:100%;
 .social-media  a{
 color: #FDEAE6;
 text-decoration: none;
+}
+/* =====  blood pressure */
+
+
+.Kool__Root{
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, .3);
+  margin-right: 2%;
+  width: 100%;
+  position: fixed;
+  top: 58%;
+  left: 16%;
+  clear: both;
+
+}
+#chartHolder{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-end;
+
+
+
+}
+.odd_pressure{
+ width:9px;
+ height:9px;
+ border-radius:100%;
+ background-color:#F49732;
+ box-sizing:border-box;
+}
+
+.high_blood_pressure{
+ border:solid 2px #F49732;
+ animation:high_blood_pressure 1.6s 0s ease-out infinite
+}
+
+@keyframes high_blood_pressure{
+ 0%{box-shadow:0 0 2px 1px rgba(244, 151, 50, 0), 0 0 0px 0px rgba(255, 255, 255, 0.5), 0 0 0px 0px rgba(244, 151, 50, 0);}
+ 10%{box-shadow:0 0 2px 1px rgba(244, 151, 50, 0.5), 0 0 3px 2px rgba(255, 255, 255, 0.5), 0 0 3px 4px rgba(244, 151, 50, 0.5);}
+ 100%{box-shadow:0 0 2px 1px rgba(244, 151, 50, 0), 0 0 0px 10px rgba(255, 255, 255, 0.5), 0 0 0px 10px rgba(244, 151, 50, 0);}
+}
+
+@-webkit-keyframes high_blood_pressure{
+ 0%{box-shadow:0 0 2px 1px rgba(244, 151, 50, 0), 0 0 0px 0px rgba(255, 255, 255, 0.5), 0 0 0px 0px rgba(244, 151, 50, 0);}
+ 10%{box-shadow:0 0 2px 1px rgba(244, 151, 50, 0.5), 0 0 3px 2px rgba(255, 255, 255, 0.5), 0 0 3px 4px rgba(244, 151, 50, 0.5);}
+ 100%{box-shadow:0 0 2px 1px rgba(244, 151, 50, 0), 0 0 0px 10px rgba(255, 255, 255, 0.5), 0 0 0px 10px rgba(244, 151, 50, 0);}
+}
+
+.low_blood_pressure{
+ background-color:#5587a2;
+ border:solid 2px #5587a2;
+ animation:low_blood_pressure 2s 0s ease-out infinite
+}
+
+@keyframes low_blood_pressure{
+ 0%{box-shadow:0 0 2px 1px rgba(85, 135, 162, 0), 0 0 0px 0px rgba(255, 255, 255, 0.5), 0 0 0px 0px rgba(85, 135, 162, 0);}
+ 10%{box-shadow:0 0 2px 1px rgba(85, 135, 162, 0.5), 0 0 3px 4px rgba(255, 255, 255, 0.5), 0 0 3px 4px rgba(85, 135, 162, 0.5);}
+ 100%{box-shadow:0 0 2px 1px rgba(85, 135, 162, 0), 0 0 0px 10px rgba(255, 255, 255, 0.5), 0 0 0px 10px rgba(85, 135, 162, 0);}
+}
+
+@-webkit-keyframes low_blood_pressure{
+ 0%{box-shadow:0 0 2px 1px rgba(85, 135, 162, 0), 0 0 0px 0px rgba(255, 255, 255, 0.5), 0 0 0px 0px rgba(85, 135, 162, 0);}
+ 10%{box-shadow:0 0 2px 1px rgba(85, 135, 162, 0.5), 0 0 3px 4px rgba(255, 255, 255, 0.5), 0 0 3px 4px rgba(85, 135, 162, 0.5);}
+ 100%{box-shadow:0 0 2px 1px rgba(85, 135, 162, 0), 0 0 0px 10px rgba(255, 255, 255, 0.5), 0 0 0px 10px rgba(85, 135, 162, 0);}
 }
