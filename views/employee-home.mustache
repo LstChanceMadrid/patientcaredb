@@ -16,28 +16,33 @@
 
     </head>
 
-	<body class="main-nav-background clearfix overflowfix">
+	<body class="main-nav-background overflowfix">
 		<header class="dashboard">&nbsp;&nbsp;&nbsp;Dashboard</header>
 
-		<section class="main-nav-container">
-			<p><a href="/{{hospitalname}}/{{hospitalid}}/{{username}}/{{employeeid}}/new-patient"><img src="/styles/new_patient2.jpg" alt="new patient"></a></p>
+		<section class="flex">
+			<div class="main-nav-container">
+				<p><a href="/{{hospitalname}}/{{hospitalid}}/{{username}}/{{employeeid}}/new-patient"><img src="/styles/new_patient2.jpg" alt="new patient"></a></p>
 
-			<p><a href="#"><img src="/styles/treatment2.jpg" alt="treatments"></a></p>
-		</section>
-
-		<section class="patient-card clearfix overflowfix">
-			<div class="date-container">
-				<div class="date" id="printDay"></div>
-			
-				<div class="date" id="printDate"></div>
-			
-				<div class="date" id="printTime"></div>
+				<p><a href="#"><img src="/styles/treatment2.jpg" alt="treatments"></a></p>
 			</div>
 
-			{{#patients}}
-			{{firstname}}
-			{{lastname}},
-			{{/patients}}
+			<div class="patient-card overflowfix">
+				<div class="date-container">
+					<div class="date" id="printDay"></div>
+				
+					<div class="date" id="printDate"></div>
+				
+					<div class="date" id="printTime"></div>
+				</div>
+
+				<div class="patient-columns">
+					{{#patients}}
+					<div class="patient-container">
+					{{firstname}}, {{lastname}}
+					</div>
+					{{/patients}}
+				</div>
+			</div>
 		</section>
 	</body>
 
