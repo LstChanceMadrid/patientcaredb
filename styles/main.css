@@ -444,8 +444,8 @@ box-shadow: 10px 10px 15px rgba(0, 0, 0, .3);
 .patient-card{
   background-color: #e6dafd;
   width: 40%;
-  min-height: 25%;
-
+  min-height: 15%;
+  max-height: 35%;
   border-radius: 10px;
   box-shadow: 10px 10px 15px rgba(0, 0, 0, .3);
 }
@@ -458,10 +458,11 @@ box-shadow: 10px 10px 15px rgba(0, 0, 0, .3);
 .patient-container {
 	width: 40%;
 	background-color: rgb(36, 172, 138);
-	margin: 0.5em 5% 0 5%;
+	margin: 0.8em 5% 0 5%;
 	padding: 0.25em 0 0.25em 0;
 	border-radius: 2px;
 	text-align: center;
+  font-size: 1.2em;
 }
 
 
@@ -642,18 +643,14 @@ text-decoration: none;
 .Kool__Root{
   box-shadow: 10px 10px 15px rgba(0, 0, 0, .3);
   margin-right: 2%;
+  margin-top: 1.5em;
   width: 100%;
   position: fixed;
-  top: 58%;
-  left: 16%;
-  clear: both;
+  
 
 }
 #chartHolder{
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: flex-end;
+
 
 
 
