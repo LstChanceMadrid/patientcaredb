@@ -302,10 +302,13 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
 
 app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/all-patients', (req, res) => {
     let hospitalid = req.params.hospitalid;
+    let hospitalname = req.params.hospitalname;
+    let username = req.params.username;
+    let employeeid = req.params.employeeid;
+
     
     db.any('SELECT * FROM patients WHERE hospitalid = $1', [hospitalid]).then(patient => {
-    
-        res.render('all-patients', {patient : patient});
+        res.render('all-patients', {patient : patient, hospitalid : hospitalid, hospitalname : hospitalname, username : username, employeeid : employeeid});
     }).catch(e => {
         console.log(e);
     });
@@ -313,12 +316,13 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/all-patients', (req, res) => {
 
 // ----- detailed patient info page
 
-app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/patient-info', (req, res) => {
+app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res) => {
     let hospitalid = req.params.hospitalid;
+    let patientid = req.params.patientid;
 
-    db.one('SELECT * FROM patients WHERE hospitalid = $1 AND patientid = $2', [hospitalid,patientid]).then(patient => {
+    db.one('SELECT * FROM patients WHERE hospitalid = $1 AND patientid = $2', [hospitalid, patientid]).then(patient => {
         
-        res.render('patient-info', {patient : patient});
+        res.render('edit-info', {patient : patient});
     }).catch(e => {
         console.log(e);
     });
@@ -327,7 +331,7 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/patient-info', (req, res) => {
 
 // ----- edit patient info page
 
-app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/edit-info', (req, res) => {
+app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res) => {
     
     let hospitalname = req.params.hospital;
     let hospitalid = req.params.hospitalid;
