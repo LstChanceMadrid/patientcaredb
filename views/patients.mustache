@@ -58,7 +58,7 @@
 					<div class="form-group col-md-4">
 						<label for="inputState">State</label>
 
-						<select id="inputState" class="form-control">
+						<select id="inputState" name="state" class="form-control">
 							<option disabled selected>Select</option>
 							<option value="AL">Alabama</option>
 							<option value="AK">Alaska</option>
@@ -117,7 +117,7 @@
 					<div class="form-group col-md-2">
 						<label for="inputZip">Zip</label>
 			
-						<input type="text" class="form-control" id="inputZip">
+						<input type="text" class="form-control" name="zipcode" id="inputZip">
 					</div>
 				</div>
 
@@ -156,18 +156,18 @@
 				<div class="form-group">
 					<label for="exampleFormControlSelect1">Ethnicity</label>
 
-					<select class="form-control" id="exampleFormControlSelect1">
+					<select class="form-control" id="exampleFormControlSelect1" name="ethnicity">
 						<option disabled selected>Select</option>
 
-						<option type="text" name="ethnicity" value="american-indian-alaska-native">American Indian or Alaska Native</option>
+						<option type="text" value="american-indian-alaska-native">American Indian or Alaska Native</option>
 
-						<option type="text" name="ethnicity" value="asian">Asian</option>
+						<option type="text" value="asian">Asian</option>
 
-						<option type="text" name="ethnicity" value="black-african-american">Black or African American</option>
+						<option type="text" value="black-african-american">Black or African American</option>
 
-						<option type="text" name="ethnicity" value="hawaiian-pacific-islander">Native Hawaiian or Other Pacific Islander</option>
+						<option type="text" value="hawaiian-pacific-islander">Native Hawaiian or Other Pacific Islander</option>
 
-						<option type="text" name="ethnicity" value="white">White</option>
+						<option type="text" value="white">White</option>
 					</select>
 				</div>   
 			
@@ -177,7 +177,7 @@
 				<div class="form-group">
 					<label for="exampleFormControlSelect1">Country</label> 
 
-					<select class="form-control" id="exampleFormControlSelect1">
+					<select class="form-control" id="exampleFormControlSelect1" name="countryofbirth">
 						<option value="Afghanistan">Afghanistan</option>
 						<option value="Albania">Albania</option>
 						<option value="Algeria">Algeria</option>
@@ -423,16 +423,16 @@
 				<div class="form-group">
 					<label for="exampleFormControlSelect1">Marital Status</label>
 
-					<select class="form-control" id="exampleFormControlSelect1">
+					<select class="form-control" name="maritalstatus" id="exampleFormControlSelect1">
 						<option disabled selected>Select</option>
 
-						<option type="text" name="maritalstatus" value="single">Single<br>
+						<option type="text" value="single">Single<br>
 
-						<option type="text" name="maritalstatus" value="married">Married<br>
+						<option type="text" value="married">Married<br>
 
-						<option type="text" name="maritalstatus" value="separated">Separated<br>
+						<option type="text" value="separated">Separated<br>
 
-						<option type="text" name="maritalstatus" value="separated">Widow<br>
+						<option type="text" value="widow">Widow<br>
 					</select>
 				</div>   
 			
@@ -443,7 +443,7 @@
 				<div class="form-group">
 					<label for="exampleFormControlSelect1">Blood Type</label>
 
-					<select class="form-control" id="exampleFormControlSelect1">
+					<select class="form-control" id="exampleFormControlSelect1" name="bloodtype">
 						<option disabled selected>Select</option>
 						<option type="text" name="bloodtype" value="A-">A-<br>
 						<option type="text" name="bloodtype" value="A+">A+<br>
@@ -461,12 +461,12 @@
 				<div class="form-group">
 					<label for="exampleFormControlSelect1">Citizen</label>
 
-					<select class="form-control" id="exampleFormControlSelect1">
+					<select class="form-control" id="exampleFormControlSelect1" name="citizen">
 						<option disabled selected>Select</option>
 
-						<option type="text" name="citizen" value="Yes">Yes</option>
+						<option type="text" value="Yes">Yes</option>
 
-						<option type="text" name="citizen" value="No">No</option>
+						<option type="text" value="No">No</option>
 					</select>
 				</div>
 			
@@ -486,21 +486,21 @@
 				<div class="form-group">
 					<label for="exampleFormControlTextarea1">Additional Notes</label>
 
-					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="additionalnotes"></textarea>
 				</div>
 
 				
 				<div class="form-group">
 					<label for="exampleFormControlTextarea1">Reason for Visit</label>
 
-					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="reasonforvisit"></textarea>
 				</div><br><br><br>
 
 		
 				<div class="form-group">
 					<label for="formGroupExampleInput">Medication</label>
 
-					<input type="text" class="form-control" id="formGroupExampleInput">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="medication">
 				</div>
 				
 				<div class="form-group">
@@ -512,120 +512,120 @@
 				<div class="form-group">
 					<label for="formGroupExampleInput">Patient Room Number</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="roomnumber">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Admission Type</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="admissiontype">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Ambulation</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="ambulation">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Assistive Devices</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="assistivedevices">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Communication</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="communication">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Diagnosis</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="diagnosis">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Feeding</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="feeding">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Hearing</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="hearing">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Medical</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="medical">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Medical Administration</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="medicaladministration">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Operations</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="operations">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Oral Hygiene</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="oralhygiene">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Personal Hygiene</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="personalhygiene">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Psychiatric</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="psychiatric">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Religion</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="religion">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Surgical</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="surgical">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput">Toileting</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput">
+					<input type="text" class="form-control" id="formGroupExampleInput" name="toileting">
 				</div>
 				
 				<div class="form-group">
 					<label for="formGroupExampleInput2">Vision</label>
 				
-					<input type="text" class="form-control" id="formGroupExampleInput2">
+					<input type="text" class="form-control" id="formGroupExampleInput2" name="vision">
 				</div>
 					
 				<div class="form-group">
 					<label for="exampleFormControlSelect1">Head of Bed Elevated</label>
 				
-					<select class="form-control" id="exampleFormControlSelect1">
+					<select class="form-control" id="exampleFormControlSelect1" name="headofbedelevated">
 						<option disabled selected>Select</option>
 
-						<option type="text" name="headofbedelevated" value="yes">Yes<br>
+						<option type="text" value="yes">Yes<br>
 
-						<option type="text" name="headofbedelevated" value="no">No<br>
+						<option type="text" value="no">No<br>
 					</select>
 				</div>   
 					
