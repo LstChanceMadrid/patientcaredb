@@ -17,10 +17,10 @@
         <button type="button" class="list-group-item list-group-item-action">
             {{lastname}},&nbsp;&nbsp;{{firstname}}&nbsp;&nbsp;{{roomnumber}}
         </button>
-        <button type="button" class="edit-patient"
-                <a href="/{{hospitalname}}/{{hospitalid}}/{{username}}/{{employeeid}}//edit-info">VIEW&nbsp;/&nbsp;EDIT</button>
-        <button type="button" class="delete-patient">DELETE</button>
+        <button id="viewButton" data-patientid="{{patientid}}" type="button" class="edit-patient">VIEW&nbsp;/&nbsp;EDIT</button>
+        <button id="deleteButton" data-patientid="{{patientid}}" type="button" class="delete-patient">DELETE</button>
     {{/patient}}
 </div>
+    <script src="allpatients.js"></script>
 </body>
 </html>

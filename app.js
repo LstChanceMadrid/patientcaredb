@@ -316,7 +316,7 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/all-patients', (req, res) => {
 app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/patient-info', (req, res) => {
     let hospitalid = req.params.hospitalid;
 
-    db.one('SELECT * FROM patients WHERE hospitalid = $1', [hospitalid]).then(patient => {
+    db.one('SELECT * FROM patients WHERE hospitalid = $1 AND patientid = $2', [hospitalid,patientid]).then(patient => {
         
         res.render('patient-info', {patient : patient});
     }).catch(e => {
