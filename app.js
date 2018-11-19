@@ -327,7 +327,7 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/patient-info', (req, res) => {
 
 // ----- edit patient info page
 
-app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res) => {
+app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/edit-info', (req, res) => {
     
     let hospitalname = req.params.hospital;
     let hospitalid = req.params.hospitalid;
