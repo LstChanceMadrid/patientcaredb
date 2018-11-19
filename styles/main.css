@@ -74,7 +74,6 @@ opacity: .9;
  min-height: 100vh;
  display: flex;
  justify-content: space-between;
- margin-top: -35%;
  margin-left: 2%;
  margin-right: 2%;
 }
@@ -95,7 +94,7 @@ opacity: .9;
 
 .paragraph{
     margin-top: 5%;
-    margin-left: 5%; 
+    margin-left: 5%;
     margin-right: 5%;
 }
 
@@ -531,7 +530,7 @@ opacity: .4;
       display: block;
       border-radius: 10%;
 	}
-	
+
     #printTime {
       color: #54515e;
 }
