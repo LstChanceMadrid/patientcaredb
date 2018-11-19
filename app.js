@@ -384,8 +384,6 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res)
     })
 })
 
-
-
 // starts the server
 
 app.listen(port, (req, res) => {
