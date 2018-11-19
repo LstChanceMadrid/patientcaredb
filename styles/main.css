@@ -6,7 +6,6 @@
 body{
 margin: 0;
 padding: 0;
-
 }
 
 .main-background {
@@ -75,7 +74,9 @@ opacity: .9;
  min-height: 100vh;
  display: flex;
  justify-content: space-between;
-
+ margin-top: -35%;
+ margin-left: 2%;
+ margin-right: 2%;
 }
 .card {
  margin: 12px;
@@ -84,9 +85,18 @@ opacity: .9;
  padding: 0 0 50px 0
 }
 .card > header {
-
  height: 200px;
  border-radius:  7px 7px 0 0;
+}
+
+#card-title{
+    margin-top: 5%;
+}
+
+.paragraph{
+    margin-top: 5%;
+    margin-left: 5%; 
+    margin-right: 5%;
 }
 
 .card button {
