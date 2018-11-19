@@ -298,6 +298,20 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
 });
 
 
+// ---------------------- display all patients -----------------------------------------//
+
+app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/all-patients', (req, res) => {
+    console.log("works")
+    let patientid = req.params.patientid;
+    console.log(req.url)
+    db.any('SELECT * FROM patients').then(patient => {
+    
+        res.render('all-patients', {patient : patient});
+    }).catch(e => {
+        console.log(e);
+    });
+});
+
 // ----- detailed patient info page
 
 app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/patient-info', (req, res) => {
