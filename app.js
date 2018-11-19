@@ -246,7 +246,7 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
     let username = req.params.username;
     let employeeid = req.params.employeeid;
     
-    let admissiondate = req.body.admissiondate;
+    let admissiondate = new Date();
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
     let dob = req.body.dob;
@@ -318,11 +318,32 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/all-patients', (req, res) => {
 
 app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res) => {
     let hospitalid = req.params.hospitalid;
+    let hospitalname = req.params.hospitalname;
+    let username = req.params.username;
+    let employeeid = req.params.employeeid;
     let patientid = req.params.patientid;
 
     db.one('SELECT * FROM patients WHERE hospitalid = $1 AND patientid = $2', [hospitalid, patientid]).then(patient => {
-        
-        res.render('edit-info', {patient : patient});
+        let month = patient.dob.getMonth();
+        if (month < 10) {
+            month = [0, month].join("");
+        }
+
+        let day = patient.dob.getDate();
+        if (day < 10) {
+            day = [0, day].join("");
+        }
+
+        let year = patient.dob.getFullYear();
+
+        if (patient.citizen === true) {
+            patient.citizen = 'yes'
+        } else {
+            patient.citizen = 'no'
+        }
+
+        dob = [year+ "-"+ month+"-"+ day]
+        res.render('edit-info', {patient : patient, dob : dob, hospitalname : hospitalname, username : username, employeeid : employeeid});
     }).catch(e => {
         console.log(e);
     });
@@ -382,9 +403,9 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res)
     let ethnicity = req.body.ethnicity;
 
     // resets all the patient data to the new defined values
-    db.one('UPDATE patients SET admissiondate = $1, firstname = $2, lastname = $3, dob = $4, sex = $5, maritalstatus = $6, countryofbirth = $7, address = $8, city = $9, state = $10, zipcode = $11, telephone = $12, email = $13, religion = $14, citizen = $15, reasonforvisit = $16, medication = $17, drugallergies = $18, roomnumber = $19, hospitalid = $20, dischargedate = $21, surgical = $22, medical = $23, psychiatric = $24, admissiontype = $25, communication = $26, vision = $27, hearing = $28, assistivedevices = $29, toileting = $30, medicationadministration = $31, feeding = $32, diettexture = $33, ambulation = $34, personalhygiene = $35, oralhygiene = $36, headofbedelevated = $37, additionalnotes = $38, diagnosis = $39, operations = $40, bloodtype = $41, ethnicity = $42 WHERE patientid = $43', [admissiondate, firstname, lastname, dob, sex, maritalstatus, countryofbirth, address, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations, bloodtype, ethnicity, patientid]).then(() => {
+    db.any('UPDATE patients SET firstname = $1, lastname = $2, dob = $3, sex = $4, maritalstatus = $5, countryofbirth = $6, address = $7, city = $8, state = $9, zipcode = $10, telephone = $11, email = $12, religion = $13, citizen = $14, reasonforvisit = $15, medication = $16, drugallergies = $17, roomnumber = $18, hospitalid = $19, dischargedate = $20, surgical = $21, medical = $22, psychiatric = $23, admissiontype = $24, communication = $25, vision = $26, hearing = $27, assistivedevices = $28, toileting = $29, medicationadministration = $30, feeding = $31, diettexture = $32, ambulation = $33, personalhygiene = $34, oralhygiene = $35, headofbedelevated = $36, additionalnotes = $37, diagnosis = $38, operations = $39, bloodtype = $40, ethnicity = $41 WHERE patientid = $42', [firstname, lastname, dob, sex, maritalstatus, countryofbirth, address, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations, bloodtype, ethnicity, patientid]).then(() => {
 
-        res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/:patientid/patient-info');
+        res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/all-patients');
     }).catch(e => {
         console.log(e);
     })
