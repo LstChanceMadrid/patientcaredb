@@ -24,9 +24,12 @@
 <div class="date" id="printDate"></div>
 <div class="date" id="printTime"></div>
 </div>
-{{#patients}}
-{{firstname}}
-{{lastname}},
+    {{#patients}}
+    <ul>
+        <li>
+            {{firstname}}{{lastname}}
+        </li>
+    </ul>
 {{/patients}}
 </section>
 </body>

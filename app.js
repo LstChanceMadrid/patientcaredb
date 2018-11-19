@@ -301,9 +301,7 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
 // ---------------------- display all patients -----------------------------------------//
 
 app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/all-patients', (req, res) => {
-    console.log("works")
     let patientid = req.params.patientid;
-    console.log(req.url)
     db.any('SELECT * FROM patients').then(patient => {
     
         res.render('all-patients', {patient : patient});
@@ -314,9 +312,10 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/all-patients', (req, res) => {
 
 // ----- detailed patient info page
 
-app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/patient-info', (req, res) => {
+app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/patient-info', (req, res) => {
     let patientid = req.params.patientid;
-    db.one('SELECT * FROM patients WHERE patientid = $1', [patientid]).then(patient => {
+    db.one('SELECT * FROM patients').then(patient => {
+        
         res.render('patient-info', {patient : patient});
     }).catch(e => {
         console.log(e);
