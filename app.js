@@ -324,7 +324,18 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res) 
     let patientid = req.params.patientid;
 
     db.one('SELECT * FROM patients WHERE hospitalid = $1 AND patientid = $2', [hospitalid, patientid]).then(patient => {
-        let month = patient.dob.getMonth();
+        const countryname = [];
+
+        // countries api
+        request('https://restcountries.eu/rest/v2/all', (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                let info = JSON.parse(body);
+                
+                for (index in info) {
+                    countryname.push({name : info[index].name});
+                };
+            };
+            let month = patient.dob.getMonth();
         if (month < 10) {
             month = [0, month].join("");
         }
@@ -343,7 +354,9 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res) 
         }
 
         dob = [year+ "-"+ month+"-"+ day]
-        res.render('edit-info', {patient : patient, dob : dob, hospitalname : hospitalname, username : username, employeeid : employeeid});
+        
+        res.render('edit-info', {patient : patient, dob : dob, hospitalname : hospitalname, username : username, employeeid : employeeid, countryname : countryname});
+        });
     }).catch(e => {
         console.log(e);
     });
