@@ -268,7 +268,7 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
     let dischargedate = req.body.dischargedate;
     let surgical = req.body.surgical;
     let medical = req.body.medical;
-    let psychiatric = req.body.letpsychiatric;
+    let psychiatric = req.body.psychiatric;
     let admissiontype = req.body.admissiontype;
     let communication = req.body.communication;
     let vision = req.body.vision;
@@ -357,7 +357,7 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res)
     let dischargedate = req.body.dischargedate;
     let surgical = req.body.surgical;
     let medical = req.body.medical;
-    let psychiatric = req.body.letpsychiatric;
+    let psychiatric = req.body.psychiatric;
     let admissiontype = req.body.admissiontype;
     let communication = req.body.communication;
     let vision = req.body.vision;
