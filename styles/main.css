@@ -189,6 +189,13 @@ text-align: center;
    top: 4%;
    left: 2%;
 }
+
+.modal-btn:hover {
+  color: #58A6FF ;
+  outline: solid #FF684B 5px;
+  transition: .7s;
+}
+
  #modal-toggle {
 	 display: none;
 }
@@ -437,8 +444,8 @@ box-shadow: 10px 10px 15px rgba(0, 0, 0, .3);
 .patient-card{
   background-color: #e6dafd;
   width: 40%;
-  min-height: 300px;
-  margin: auto;
+  min-height: 25%;
+
   border-radius: 10px;
   box-shadow: 10px 10px 15px rgba(0, 0, 0, .3);
 }
