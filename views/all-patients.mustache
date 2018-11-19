@@ -17,8 +17,8 @@
         <button type="button" class="list-group-item list-group-item-action">
             {{lastname}},&nbsp;&nbsp;{{firstname}}&nbsp;&nbsp;{{roomnumber}}
         </button>
-        <button type="button" class="edit-patient"
-                <a href="/{{hospitalname}}/{{hospitalid}}/{{username}}/{{employeeid}}//edit-info">VIEW&nbsp;/&nbsp;EDIT</button>
+        <a href="/{{hospitalname}}/{{hospitalid}}/{{username}}/{{employeeid}}/{{patientid}}/edit-info"><button type="button" class="edit-patient">
+                VIEW&nbsp;/&nbsp;EDIT</button></a>
         <button type="button" class="delete-patient">DELETE</button>
     {{/patient}}
 </div>
