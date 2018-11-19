@@ -301,8 +301,9 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
 // ---------------------- display all patients -----------------------------------------//
 
 app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/all-patients', (req, res) => {
-    let patientid = req.params.patientid;
-    db.any('SELECT * FROM patients').then(patient => {
+    let hospitalid = req.params.hospitalid;
+    
+    db.any('SELECT * FROM patients WHERE hospitalid = $1', [hospitalid]).then(patient => {
     
         res.render('all-patients', {patient : patient});
     }).catch(e => {
@@ -313,8 +314,9 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/all-patients', (req, res) => {
 // ----- detailed patient info page
 
 app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/patient-info', (req, res) => {
-    let patientid = req.params.patientid;
-    db.one('SELECT * FROM patients').then(patient => {
+    let hospitalid = req.params.hospitalid;
+
+    db.one('SELECT * FROM patients WHERE hospitalid = $1', [hospitalid]).then(patient => {
         
         res.render('patient-info', {patient : patient});
     }).catch(e => {
