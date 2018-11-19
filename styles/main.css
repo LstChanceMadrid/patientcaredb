@@ -74,7 +74,7 @@ opacity: .9;
  min-height: 100vh;
  display: flex;
  justify-content: space-between;
- margin-top: -40%;
+ margin-top: 5%;
  margin-left: 2%;
  margin-right: 2%;
 }
@@ -646,7 +646,7 @@ text-decoration: none;
   margin-top: 1.5em;
   width: 100%;
   position: fixed;
-  
+
 
 }
 #chartHolder{
