@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 *{
   font-family: Helvetica, sans-serif;
@@ -698,3 +699,9 @@ text-decoration: none;
  10%{box-shadow:0 0 2px 1px rgba(85, 135, 162, 0.5), 0 0 3px 4px rgba(255, 255, 255, 0.5), 0 0 3px 4px rgba(85, 135, 162, 0.5);}
  100%{box-shadow:0 0 2px 1px rgba(85, 135, 162, 0), 0 0 0px 10px rgba(255, 255, 255, 0.5), 0 0 0px 10px rgba(85, 135, 162, 0);}
 }
+=======
+body {
+    margin: 0;
+    padding: 0;
+}
+>>>>>>> d59f8dc834558e5318c300c192c367160e3f6301
