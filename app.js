@@ -12,7 +12,7 @@ const sess = {
     secret: process.env.FOO_COOKIE_SECRET,
     resave: false,
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }};
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 
 
 const HOSPITAL_PARAMS = '/:hospitalname/:hospitalid';
