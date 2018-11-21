@@ -7,7 +7,11 @@ const connectionString = "postgres://fmngwkmfyfhdxv:fa0290f880e479e8b59d5c6ce5a8
 const db = pgp(connectionString);
 const request = require('request'); 
 const session = require('express-session');
-const sess = {secret: 'keyboard cat', resave: false, saveUninitialized: false};
+const sess = {
+    store: new (require('connect-pg-simple')(session))(),
+    secret: process.env.FOO_COOKIE_SECRET,
+    resave: false,
+    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }};
 const port = process.env.port || 3000;
 
 
