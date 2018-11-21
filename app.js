@@ -425,6 +425,6 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res)
 
 // starts the server
 
-app.listen(port, (req, res) => {
+app.listen(process.env.port || 3000, (req, res) => {
     console.log('Server running...');
 });
