@@ -9,8 +9,9 @@ const request = require('request');
 const session = require('express-session');
 const sess = {
     store: new (require('connect-pg-simple')(session))(),
-    secret: process.env.FOO_COOKIE_SECRET,
+    secret: 'cat',
     resave: false,
+    saveUninitialized: false,
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }};
 const port = process.env.PORT || 3000;
 
