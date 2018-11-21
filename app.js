@@ -8,7 +8,7 @@ const db = pgp(connectionString);
 const request = require('request'); 
 const session = require('express-session');
 const sess = {secret: 'keyboard cat', resave: false, saveUninitialized: false};
-const port = 3000;
+const port = process.env.port || 3000;
 
 
 const HOSPITAL_PARAMS = '/:hospitalname/:hospitalid';
@@ -425,6 +425,6 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res)
 
 // starts the server
 
-app.listen(process.env.port || 3000, (req, res) => {
+app.listen(port, (req, res) => {
     console.log('Server running...');
 });
