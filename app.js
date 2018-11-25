@@ -34,7 +34,9 @@ app.set('view engine', 'mustache');
 // ----- hospital login page
 
 app.get('/', (req, res) => {
-    res.render('./index');
+    db.any("SELECT * FROM hospitals").then(hospitals => {
+        res.render('./index', {hospitals : hospitals});
+    });
 });
 
 
@@ -73,9 +75,8 @@ app.post('/register-hospital', (req, res) => {
 app.post('/log-in-hospital', (req, res) => {
 
     let hospitalname = req.body.hospitalname;
-    let accesscode = req.body.accesscode;
 
-    db.one('SELECT hospitalid, hospitalname FROM hospitals WHERE hospitalname = $1 AND accesscode = $2', [hospitalname, accesscode]).then(hospital => {
+    db.one('SELECT hospitalid, hospitalname FROM hospitals WHERE hospitalname = $1', [hospitalname]).then(hospital => {
         let hospitalname = hospital.hospitalname;
         let hospitalid = hospital.hospitalid;
 
