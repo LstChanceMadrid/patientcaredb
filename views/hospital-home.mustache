@@ -9,17 +9,30 @@
         <title>Index</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
         <link rel="stylesheet" type="text/css" href="/styles/main.css" />
+
         <link rel="stylesheet" media='screen and (min-width: 200px) and (max-width: 780px)' href='/styles/moblie.css' />
-          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" />
     </head>
 
     <body>
+        <div class="background-frame hospital-frame">
+            <img class="main-background hospital-background"  src="/styles/hospital-home.jpg" alt="main image">
+        </div>
+
+        <header>
+            {{#hospital}}
+                {{hospitalname}}<br />
+                {{address}}<br />
+                {{city}}, {{state}} {{zipcode}}<br />
+                Telephone: {{telephone}}
+            {{/hospital}}
+        </header>
 
 
-      <div class="background-frame hospital-frame">
-      <img class="main-background hospital-background"  src="/styles/hospital-home.jpg" alt="main image">
-      </div>
+      
 
       <label class="modal-btn" for="modal-toggle">Start Here</label>
 
