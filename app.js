@@ -149,10 +149,10 @@ app.post(HOSPITAL_PARAMS + '/register-employee', (req, res) => {
     // validates that a username doesnt already exist
     db.none('SELECT username, employeeid FROM employees WHERE username = $1', [username]).then(() => {
 
-        bcrypt.hash(password, saltRounds.then(hash => {
+        bcrypt.hash(password, saltRounds).then(hash => {
         
         // creates a new user
-        db.none('INSERT INTO employees(username, password, firstname, lastname, address, city, state, zipcode, telephone, hospitalid) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [username, password, firstname, lastname, address, city, state, zipcode, telephone, hospitalid]).then(() => {
+        db.none('INSERT INTO employees(username, password, firstname, lastname, address, city, state, zipcode, telephone, hospitalid) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [username, hash, firstname, lastname, address, city, state, zipcode, telephone, hospitalid]).then(() => {
 
             // grabs the user information
             db.one('SELECT employees.username, employees.employeeid, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = hospitals.hospitalid WHERE username = $1', [username]).then(result => {
@@ -168,7 +168,7 @@ app.post(HOSPITAL_PARAMS + '/register-employee', (req, res) => {
             });
         });
         })
-    )}).catch(e => {
+    }).catch(e => {
         let errorType = e.name;
 
         // returns user to the login page if any information is not valid
@@ -196,19 +196,26 @@ app.post(HOSPITAL_PARAMS + '/log-in-employee', (req, res) => {
 
     let username = req.body.username;
     let password = req.body.password;
-
+    
     // checks that the username exists and correlating password is valid
-    db.one('SELECT employees.employeeid, employees.username, employees.password, employees.hospitalid, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = $1 AND hospitals.hospitalid = $1 WHERE employees.username = $2 AND employees.password = $3', [hospitalid, username, password]).then(result => {
+    db.one('SELECT employees.employeeid, employees.username, employees.password, employees.hospitalid, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = $1 AND hospitals.hospitalid = $1 WHERE employees.username = $2', [hospitalid, username]).then(user => {
+        console.log(user.password)
+        bcrypt.compare(password, user.password).then(result => {
+                    if (result === true) {
 
-        let hospitalname = result.hospitalname;
-        let hospitalid = result.hospitalid;
+        let hospitalname = user.hospitalname;
+        let hospitalid = user.hospitalid;
 
-        let username = result.username;
-        let employeeid = result.employeeid;
+        let username = user.username;
+        let employeeid = user.employeeid;
 
         // sends employee to their home page
         res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/home');
-        
+                    }
+                    else {
+                        res.redirect('/')
+                    }
+                })
     }).catch(e => {
         let errorType = e.name;
 
@@ -264,7 +271,21 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/new-patient', (req, res) => {
                     countryname.push({name : info[index].name});
                 };
             };
-            res.render('patients', {result : result, employeeid : employeeid, countryname : countryname});
+            const state = [];
+            // state api
+            request('https://gist.githubusercontent.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_titlecase.json', (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                let info = JSON.parse(body);
+                
+                for (index in info) {
+                    state.push({name : info[index].name});
+                };
+            };
+            db.any('SELECT * FROM assistance').then(assistance => {
+
+            res.render('patients', {result : result, employeeid : employeeid, countryname : countryname, state : state, assistance : assistance});
+            })
+        });
         });
     }).catch(e => {
         console.log(e);
@@ -369,6 +390,16 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res) 
                     countryname.push({name : info[index].name});
                 };
             };
+            const state = [];
+            // state api
+            request('https://gist.githubusercontent.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_titlecase.json', (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                let info = JSON.parse(body);
+                
+                for (index in info) {
+                    state.push({name : info[index].name});
+                };
+            };
             let month = patient.dob.getMonth();
         if (month < 10) {
             month = [0, month].join("");
@@ -389,8 +420,12 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res) 
 
         dob = [year+ "-"+ month+"-"+ day]
         
-        res.render('edit-info', {patient : patient, dob : dob, hospitalname : hospitalname, username : username, employeeid : employeeid, countryname : countryname});
+        db.any('SELECT * FROM assistance').then(assistance => {
+
+        res.render('edit-info', {patient : patient, dob : dob, hospitalname : hospitalname, username : username, employeeid : employeeid, countryname : countryname, state : state, assistance : assistance});
         });
+    });
+    });
     }).catch(e => {
         console.log(e);
     });
