@@ -24,17 +24,20 @@
 
         <header>
             {{#hospital}}
-                {{hospitalname}}<br />
-                {{address}}<br />
-                {{city}}, {{state}} {{zipcode}}<br />
-                Telephone: {{telephone}}
+                <h4>{{hospitalname}}</h4>
+
+                <p>
+                    {{address}}<br />
+                    {{city}}, {{state}} {{zipcode}}<br />
+                    Telephone: {{telephone}}
+                </p>
             {{/hospital}}
         </header>
 
 
       
 
-      <label class="modal-btn" for="modal-toggle">Start Here</label>
+        <label class="modal-btn" for="modal-toggle">Start Here</label>
 
         <input id="modal-toggle" type="checkbox">
         <label class="modal-backdrop" for="modal-toggle"></label>
