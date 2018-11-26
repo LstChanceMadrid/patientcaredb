@@ -74,7 +74,7 @@
                 <input class="radio" id="tab-2" name="tabs-name" type="radio">
                 <label for="tab-2" class="table"><span>Sign up</span></label>
                 <div class="tabs-content">
-                  <form action="/register-hospital" method="POST">
+                  <form action="/{{hospital.hospitalname}}/{{hospital.hospitalid}}/register-employee" method="POST">
 
                       <input type="text" name="username" placeholder="Username" autofocus required />
 

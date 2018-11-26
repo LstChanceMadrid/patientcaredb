@@ -14,7 +14,8 @@ const sess = {
     saveUninitialized: false,
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }};
 const port = process.env.PORT || 3000;
-
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const HOSPITAL_PARAMS = '/:hospitalname/:hospitalid';
 const EMPLOYEE_PARAMS = '/:username/:employeeid';
@@ -29,6 +30,30 @@ app.engine('mustache', mustacheExpress());
 
 app.set('views', "./views"); 
 app.set('view engine', 'mustache');
+
+
+
+
+
+
+app.all(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/*', (req, res, next) => {
+    
+    let employeeid = req.params.employeeid;
+
+    // db.one('SELECT password FROM employees WHERE employeeid = $1', [employeeid]).then(password => {
+    //     bcrypt.compare(password, password).then(res => {
+    //         if (res === true) {
+    //             next()
+    //         } else {
+    //             res.redirect('/');
+    //         }
+    //     })
+    // })  
+    next()
+})
+
+
+
 
 
 // ----- hospital login page
@@ -113,8 +138,8 @@ app.post(HOSPITAL_PARAMS + '/register-employee', (req, res) => {
 
     let username = req.body.username;
     let password = req.body.password;
-    let employeefirstname = req.body.employeefirstname;
-    let employeelastname = req.body.employeelastname;
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
     let address = req.body.address;
     let city = req.body.city;
     let state = req.body.state;
@@ -124,8 +149,10 @@ app.post(HOSPITAL_PARAMS + '/register-employee', (req, res) => {
     // validates that a username doesnt already exist
     db.none('SELECT username, employeeid FROM employees WHERE username = $1', [username]).then(() => {
 
+        bcrypt.hash(password, saltRounds.then(hash => {
+        
         // creates a new user
-        db.none('INSERT INTO employees(username, password, employeefirstname, employeelastname, address, city, state, zipcode, telephone, hospitalid) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [username, password, employeefirstname, employeelastname, address, city, state, zipcode, telephone, hospitalid]).then(() => {
+        db.none('INSERT INTO employees(username, password, firstname, lastname, address, city, state, zipcode, telephone, hospitalid) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [username, password, firstname, lastname, address, city, state, zipcode, telephone, hospitalid]).then(() => {
 
             // grabs the user information
             db.one('SELECT employees.username, employees.employeeid, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = hospitals.hospitalid WHERE username = $1', [username]).then(result => {
@@ -135,12 +162,13 @@ app.post(HOSPITAL_PARAMS + '/register-employee', (req, res) => {
 
                 let username = result.username;
                 let employeeid = result.employeeid;
-
+                
                 // sends employee to their homepage
                 res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/home');
             });
         });
-    }).catch(e => {
+        })
+    )}).catch(e => {
         let errorType = e.name;
 
         // returns user to the login page if any information is not valid
@@ -155,6 +183,7 @@ app.post(HOSPITAL_PARAMS + '/register-employee', (req, res) => {
             console.log(e);
         };
     });
+
 });
 
 
