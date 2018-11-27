@@ -251,7 +251,7 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/home',(req, res) => {
     let employeeid = req.params.employeeid;
 
     // grabs all the patients correlating to the hospital
-    db.any('SELECT patients.firstname, patients.lastname, patients.dob, patients.sex, patients.hospitalid, hospitals.hospitalid FROM patients INNER JOIN hospitals ON hospitals.hospitalid = $1 WHERE patients.hospitalid = $1', [hospitalid]).then(patients => {
+    db.any('SELECT patients.patientid, patients.firstname, patients.lastname, patients.dob, patients.sex, patients.hospitalid, hospitals.hospitalid FROM patients INNER JOIN hospitals ON hospitals.hospitalid = $1 WHERE patients.hospitalid = $1', [hospitalid]).then(patients => {
 
         res.render('employee-home', {patients : patients, hospitalname : hospitalname, hospitalid : hospitalid, username : username, employeeid : employeeid});
     }).catch(e => {
@@ -367,10 +367,31 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
         let hospitalname = req.params.hospitalname;
 
         res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/home');
-    }).catch(e => {
-        console.log(e);
-    });
+
+    }).catch(e => {console.log(e)});
 });
+
+
+// ----- detailed patient info page
+
+app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/patient-info', (req, res) => {
+
+    let hospitalid = req.params.hospitalid;
+    let hospitalname = req.params.hospitalname;
+    let username = req.params.username;
+    let employeeid = req.params.employeeid;
+    let patientid = req.params.patientid;
+    
+    db.one('SELECT * FROM patients WHERE patientid = $1', [patientid]).then(patient => {
+
+        res.render('patient-info', {patient : patient, hospitalid : hospitalid, employeeid : employeeid});
+
+    }).catch(e => {console.log(e)});
+});
+
+
+
+
 
 
 // ----- display all patients 
@@ -386,10 +407,9 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/all-patients', (req, res) => {
 
         res.render('all-patients', {patient : patient, hospitalid : hospitalid, hospitalname : hospitalname, username : username, employeeid : employeeid});
 
-    }).catch(e => {
-        console.log(e);
-    });
+    }).catch(e => {console.log(e)});
 });
+
 
 // ----- detailed patient info page
 
@@ -519,13 +539,11 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res)
     db.any('UPDATE patients SET firstname = $1, lastname = $2, dob = $3, sex = $4, maritalstatus = $5, countryofbirth = $6, address = $7, city = $8, state = $9, zipcode = $10, telephone = $11, email = $12, religion = $13, citizen = $14, reasonforvisit = $15, medication = $16, drugallergies = $17, roomnumber = $18, hospitalid = $19, dischargedate = $20, surgical = $21, medical = $22, psychiatric = $23, admissiontype = $24, communication = $25, vision = $26, hearing = $27, assistivedevices = $28, toileting = $29, medicationadministration = $30, feeding = $31, diettexture = $32, ambulation = $33, personalhygiene = $34, oralhygiene = $35, headofbedelevated = $36, additionalnotes = $37, diagnosis = $38, operations = $39, bloodtype = $40, ethnicity = $41 WHERE patientid = $42', [firstname, lastname, dob, sex, maritalstatus, countryofbirth, address, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations, bloodtype, ethnicity, patientid]).then(() => {
 
         res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/all-patients');
-    }).catch(e => {
-        console.log(e);
-    })
-})
+
+    }).catch(e => {console.log(e)});
+});
+
 
 // ----- starts the server
 
-app.listen(port, (req, res) => {
-    console.log('Server running...');
-});
+app.listen(port, (req, res) => {console.log('Server running...')});

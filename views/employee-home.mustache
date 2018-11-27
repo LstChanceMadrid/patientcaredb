@@ -40,9 +40,11 @@
 
 				<div class="patient-columns">
 					{{#patients}}
-						<div class="patient-container">
-							{{lastname}}, {{firstname}}
-						</div>
+						<a href="/{{hospitalname}}/{{hospitalid}}/{{username}}/{{employeeid}}/{{patientid}}/patient-info">
+							<div class="patient-container">
+								{{lastname}}, {{firstname}}
+							</div>
+						</a>
 					{{/patients}}
 				</div>
 			</div>
