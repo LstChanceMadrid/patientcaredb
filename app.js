@@ -12,7 +12,8 @@ const sess = {
     secret: 'cat',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }};
+    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }
+};
 const port = process.env.PORT || 3000;
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -36,9 +37,9 @@ app.set('view engine', 'mustache');
 
 
 
-app.all(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/*', (req, res, next) => {
+// app.all(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/*', (req, res, next) => {
     
-    let employeeid = req.params.employeeid;
+    // let employeeid = req.params.employeeid;
 
     // db.one('SELECT password FROM employees WHERE employeeid = $1', [employeeid]).then(password => {
     //     bcrypt.compare(password, password).then(res => {
@@ -49,8 +50,8 @@ app.all(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/*', (req, res, next) => {
     //         }
     //     })
     // })  
-    next()
-})
+    // next()
+// })
 
 
 
@@ -59,7 +60,9 @@ app.all(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/*', (req, res, next) => {
 // ----- hospital login page
 
 app.get('/', (req, res) => {
+
     db.any("SELECT * FROM hospitals").then(hospitals => {
+
         res.render('./index', {hospitals : hospitals});
     });
 });
@@ -78,19 +81,23 @@ app.post('/register-hospital', (req, res) => {
     let telephone = req.body.telephone;
     
     db.none('SELECT hospitalname, hospitalid FROM hospitals WHERE hospitalname = $1', [hospitalname]).then(() => {
+
         db.none('INSERT INTO hospitals(hospitalname, accesscode, address, city, state, zipcode, telephone) VALUES($1, $2, $3, $4, $5, $6, $7)', [hospitalname, accesscode, address, city, state, zipcode, telephone]).then(() => {
+
             db.one('SELECT hospitalname, hospitalid FROM hospitals WHERE hospitalname = $1', [hospitalname]).then(hospital => {
+
                 let hospitalid = hospital.hospitalid;
+
                 res.redirect('/' + hospitalname + '/' + hospitalid + '/home');
             });
         });
     }).catch(e => {
-        let errorType = e.name;
-        if (errorType === 'QueryResultError') {
+
+        if (e.name === 'QueryResultError') {
             res.redirect('..');
         } else {
             console.log(e);
-        }
+        };
     });
 });
 
@@ -102,14 +109,14 @@ app.post('/log-in-hospital', (req, res) => {
     let hospitalname = req.body.hospitalname;
 
     db.one('SELECT hospitalid, hospitalname FROM hospitals WHERE hospitalname = $1', [hospitalname]).then(hospital => {
+
         let hospitalname = hospital.hospitalname;
         let hospitalid = hospital.hospitalid;
 
         res.redirect('/' + hospitalname + '/' + hospitalid + '/home');
     }).catch(e => {
-        let errorType = e.name;
 
-        if ( errorType === 'QueryResultError') {
+        if (e.name === 'QueryResultError') {
             res.redirect('..');
         } else {
             console.log(e);
@@ -121,6 +128,7 @@ app.post('/log-in-hospital', (req, res) => {
 // ----- employee login page
 
 app.get(HOSPITAL_PARAMS + '/home', (req, res) => {
+
     let hospitalid = req.params.hospitalid;
 
     db.one('SELECT hospitalname, address, city, state, zipcode, telephone, hospitalid FROM hospitals WHERE hospitalid = $1', [hospitalid]).then(hospital => {
@@ -151,39 +159,39 @@ app.post(HOSPITAL_PARAMS + '/register-employee', (req, res) => {
 
         bcrypt.hash(password, saltRounds).then(hash => {
         
-        // creates a new user
-        db.none('INSERT INTO employees(username, password, firstname, lastname, address, city, state, zipcode, telephone, hospitalid) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [username, hash, firstname, lastname, address, city, state, zipcode, telephone, hospitalid]).then(() => {
+            // creates a new user
+            db.none('INSERT INTO employees(username, password, firstname, lastname, address, city, state, zipcode, telephone, hospitalid) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [username, hash, firstname, lastname, address, city, state, zipcode, telephone, hospitalid]).then(() => {
 
-            // grabs the user information
-            db.one('SELECT employees.username, employees.employeeid, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = hospitals.hospitalid WHERE username = $1', [username]).then(result => {
+                // grabs the user information
+                db.one('SELECT employees.username, employees.employeeid, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = hospitals.hospitalid WHERE username = $1', [username]).then(result => {
 
-                let hospitalname = result.hospitalname;
-                let hospitalid = result.hospitalid;
+                    let hospitalname = result.hospitalname;
+                    let hospitalid = result.hospitalid;
 
-                let username = result.username;
-                let employeeid = result.employeeid;
-                
-                // sends employee to their homepage
-                res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/home');
+                    let username = result.username;
+                    let employeeid = result.employeeid;
+                    
+                    // sends employee to their homepage
+                    res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/home');
+                });
             });
         });
-        })
     }).catch(e => {
-        let errorType = e.name;
 
         // returns user to the login page if any information is not valid
-        if (errorType === 'QueryResultError') {
+        if (e.name === 'QueryResultError') {
+
             db.one('SELECT hospitalname, address, city, state, zipcode, telephone, hospitalid FROM hospitals WHERE hospitalid = $1', [hospitalid]).then(hospital => {
 
                 let hospitalname = hospital.hospitalname;
                 let hospitalid = hospital.hospitalid;
+
                 res.redirect('/' + hospitalname + '/' + hospitalid + '/home');
             });
         } else {
             console.log(e);
         };
     });
-
 });
 
 
@@ -199,31 +207,31 @@ app.post(HOSPITAL_PARAMS + '/log-in-employee', (req, res) => {
     
     // checks that the username exists and correlating password is valid
     db.one('SELECT employees.employeeid, employees.username, employees.password, employees.hospitalid, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = $1 AND hospitals.hospitalid = $1 WHERE employees.username = $2', [hospitalid, username]).then(user => {
-        console.log(user.password)
+
         bcrypt.compare(password, user.password).then(result => {
-                    if (result === true) {
+            if (result === true) {
 
-        let hospitalname = user.hospitalname;
-        let hospitalid = user.hospitalid;
+            let hospitalname = user.hospitalname;
+            let hospitalid = user.hospitalid;
 
-        let username = user.username;
-        let employeeid = user.employeeid;
+            let username = user.username;
+            let employeeid = user.employeeid;
 
-        // sends employee to their home page
-        res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/home');
-                    }
-                    else {
-                        res.redirect('/')
-                    }
-                })
+            // sends employee to their home page
+            res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/home');
+            } else {
+
+                res.redirect('/')
+            };
+        });
     }).catch(e => {
-        let errorType = e.name;
 
-        if (errorType === 'QueryResultError') {
+        if (e.name === 'QueryResultError') {
             db.one('SELECT hospitalid, hospitalname, address, city, state, zipcode, telephone FROM hospitals WHERE hospitalname = $1', [hospitalname]).then(hospital => {
 
                 let hospitalname = hospital.hospitalname;
                 let hospitalid = hospital.hospitalid;
+
                 res.redirect('/' + hospitalname + '/' + hospitalid + '/home');
             });
         } else {
@@ -260,32 +268,42 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/new-patient', (req, res) => {
 
     // connect the patient to the hospital they are in
     db.one('SELECT employees.username, employees.employeeid, employees.hospitalid, hospitals.hospitalname, hospitals.hospitalid FROM employees INNER JOIN hospitals ON employees.hospitalid = hospitals.hospitalid WHERE employees.employeeid = $1', [employeeid]).then(result => {
+
         const countryname = [];
 
         // countries api
         request('https://restcountries.eu/rest/v2/all', (error, response, body) => {
+
             if (!error && response.statusCode == 200) {
+
                 let info = JSON.parse(body);
                 
                 for (index in info) {
+
                     countryname.push({name : info[index].name});
                 };
             };
+
             const state = [];
+
             // state api
             request('https://gist.githubusercontent.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_titlecase.json', (error, response, body) => {
-            if (!error && response.statusCode == 200) {
-                let info = JSON.parse(body);
-                
-                for (index in info) {
-                    state.push({name : info[index].name});
-                };
-            };
-            db.any('SELECT * FROM assistance').then(assistance => {
 
-            res.render('patients', {result : result, employeeid : employeeid, countryname : countryname, state : state, assistance : assistance});
-            })
-        });
+                if (!error && response.statusCode == 200) {
+
+                    let info = JSON.parse(body);
+                    
+                    for (index in info) {
+
+                        state.push({name : info[index].name});
+                    };
+                };
+
+                db.any('SELECT * FROM assistance').then(assistance => {
+
+                    res.render('patients', {result : result, employeeid : employeeid, countryname : countryname, state : state, assistance : assistance});
+                });
+            });
         });
     }).catch(e => {
         console.log(e);
@@ -345,7 +363,9 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
 
     // puts the patients into the database
     db.none('INSERT INTO patients(admissiondate, firstname, lastname, dob, sex, maritalstatus, address, countryofbirth, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations, bloodtype, ethnicity) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42)', [admissiondate, firstname, lastname, dob, sex, maritalstatus, address, countryofbirth, city, state, zipcode, telephone, email, religion, citizen, reasonforvisit, medication, drugallergies, roomnumber, hospitalid, dischargedate, surgical, medical, psychiatric, admissiontype, communication, vision, hearing, assistivedevices, toileting, medicationadministration, feeding, diettexture, ambulation, personalhygiene, oralhygiene, headofbedelevated, additionalnotes, diagnosis, operations, bloodtype, ethnicity]).then(() => {
+
         let hospitalname = req.params.hospitalname;
+
         res.redirect('/' + hospitalname + '/' + hospitalid + '/' + username + '/' + employeeid + '/home');
     }).catch(e => {
         console.log(e);
@@ -353,17 +373,19 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/admit-patient', (req, res) => {
 });
 
 
-// ---------------------- display all patients -----------------------------------------//
+// ----- display all patients 
 
 app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/all-patients', (req, res) => {
+
     let hospitalid = req.params.hospitalid;
     let hospitalname = req.params.hospitalname;
     let username = req.params.username;
     let employeeid = req.params.employeeid;
 
-    
     db.any('SELECT * FROM patients WHERE hospitalid = $1', [hospitalid]).then(patient => {
+
         res.render('all-patients', {patient : patient, hospitalid : hospitalid, hospitalname : hospitalname, username : username, employeeid : employeeid});
+
     }).catch(e => {
         console.log(e);
     });
@@ -372,6 +394,7 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/all-patients', (req, res) => {
 // ----- detailed patient info page
 
 app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res) => {
+
     let hospitalid = req.params.hospitalid;
     let hospitalname = req.params.hospitalname;
     let username = req.params.username;
@@ -379,53 +402,62 @@ app.get(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res) 
     let patientid = req.params.patientid;
 
     db.one('SELECT * FROM patients WHERE hospitalid = $1 AND patientid = $2', [hospitalid, patientid]).then(patient => {
+
         const countryname = [];
 
         // countries api
         request('https://restcountries.eu/rest/v2/all', (error, response, body) => {
+
             if (!error && response.statusCode == 200) {
+
                 let info = JSON.parse(body);
                 
                 for (index in info) {
+
                     countryname.push({name : info[index].name});
                 };
             };
+
             const state = [];
+
             // state api
             request('https://gist.githubusercontent.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_titlecase.json', (error, response, body) => {
-            if (!error && response.statusCode == 200) {
-                let info = JSON.parse(body);
-                
-                for (index in info) {
-                    state.push({name : info[index].name});
+
+                if (!error && response.statusCode == 200) {
+                    let info = JSON.parse(body);
+                    
+                    for (index in info) {
+                        state.push({name : info[index].name});
+                    };
                 };
-            };
-            let month = patient.dob.getMonth();
-        if (month < 10) {
-            month = [0, month].join("");
-        }
 
-        let day = patient.dob.getDate();
-        if (day < 10) {
-            day = [0, day].join("");
-        }
+                let month = patient.dob.getMonth();
 
-        let year = patient.dob.getFullYear();
+                if (month < 10) {
+                    month = [0, month].join("");
+                }
 
-        if (patient.citizen === true) {
-            patient.citizen = 'yes'
-        } else {
-            patient.citizen = 'no'
-        }
+                let day = patient.dob.getDate();
+                if (day < 10) {
+                    day = [0, day].join("");
+                }
 
-        dob = [year+ "-"+ month+"-"+ day]
+                let year = patient.dob.getFullYear();
+
+                if (patient.citizen === true) {
+                    patient.citizen = 'yes'
+                } else {
+                    patient.citizen = 'no'
+                }
+
+                dob = [year+ "-"+ month+"-"+ day]
         
-        db.any('SELECT * FROM assistance').then(assistance => {
+                db.any('SELECT * FROM assistance').then(assistance => {
 
-        res.render('edit-info', {patient : patient, dob : dob, hospitalname : hospitalname, username : username, employeeid : employeeid, countryname : countryname, state : state, assistance : assistance});
+                    res.render('edit-info', {patient : patient, dob : dob, hospitalname : hospitalname, username : username, employeeid : employeeid, countryname : countryname, state : state, assistance : assistance});
+                });
+            });
         });
-    });
-    });
     }).catch(e => {
         console.log(e);
     });
@@ -442,7 +474,6 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res)
     let employeeid = req.params.employeeid;
     let patientid = req.params.patientid;
     
-    let admissiondate = req.body.admissiondate;
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
     let dob = req.body.dob;
@@ -493,7 +524,7 @@ app.post(HOSPITAL_PARAMS + EMPLOYEE_PARAMS + '/:patientid/edit-info', (req, res)
     })
 })
 
-// starts the server
+// ----- starts the server
 
 app.listen(port, (req, res) => {
     console.log('Server running...');

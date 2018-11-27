@@ -44,11 +44,8 @@
 
 						<select name="sex" class="form-control" id="exampleFormControlSelect1" required>
 							<option value="{{patient.sex}}" selected>{{patient.sex}}</option>
-
 							<option value="male">Male</option>
-
 							<option value="female">Female</option>
-
 							<option value="other">Other</option>
 						</select>
 					</div>
@@ -74,15 +71,10 @@
 
 						<select class="form-control" id="exampleFormControlSelect1" name="ethnicity">
 							<option value="{{patient.ethnicity}}" selected>{{patient.ethnicity}}</option>
-
 							<option type="text" value="american-indian-alaska-native">American Indian or Alaska Native</option>
-
 							<option type="text" value="asian">Asian</option>
-
 							<option type="text" value="black-african-american">Black or African American</option>
-
 							<option type="text" value="hawaiian-pacific-islander">Native Hawaiian or Other Pacific Islander</option>
-
 							<option type="text" value="white">White or Caucasian</option>
 						</select>
 					</div> 
@@ -112,7 +104,6 @@
 
 						<select id="inputState" name="state" class="form-control" value="{{patient.state}}">
 							<option value="{{patient.state}}"selected >{{patient.state}}</option>
-							
 							{{#state}}
 								<option value="{{name}}">{{name}}</option>
 							{{/state}}
@@ -145,7 +136,6 @@
 
 					<select class="form-control" id="exampleFormControlSelect1" name="countryofbirth">
 						<option value="{{patient.countryofbirth}}" selected>{{patient.countryofbirth}}</option>
-
 						{{#countryname}}
 							<option value="{{name}}">{{name}}</option>
 						{{/countryname}}
@@ -157,13 +147,9 @@
 
 					<select class="form-control" name="maritalstatus" id="exampleFormControlSelect1">
 						<option value="{{patient.maritalstatus}}" selected>{{patient.maritalstatus}}</option>
-
 						<option type="text" value="single">Single<br>
-
 						<option type="text" value="married">Married<br>
-
 						<option type="text" value="separated">Separated<br>
-
 						<option type="text" value="widow">Widow<br>
 					</select>
 				</div>
@@ -173,9 +159,7 @@
 
 					<select class="form-control" id="exampleFormControlSelect1" name="citizen">
 						<option value="{{patient.citizen}}" selected>{{patient.citizen}}</option>
-
 						<option type="text" value="Yes">Yes</option>
-
 						<option type="text" value="No">No</option>
 					</select>
 				</div>
@@ -223,7 +207,6 @@
 
 					<select class="form-control" id="formGroupExampleInput" name="ambulation">
 						<option value="{{patient.ambulation}}">{{patient.ambulation}}</option>
-
 						{{#assistance}}
 							<option value="{{assistance}}">{{assistanceid}} : {{assistance}}</option>
 						{{/assistance}}
@@ -313,7 +296,6 @@
 
 					<select class="form-control" id="formGroupExampleInput" name="toileting">
 						<option value="{{patient.toileting}}">{{patient.toileting}}</option>
-
 						{{#assistance}}
 							<option value="{{assistance}}">{{assistanceid}} : {{assistance}}</option>
 						{{/assistance}}
@@ -331,14 +313,13 @@
 				
 					<select class="form-control" id="exampleFormControlSelect1" name="headofbedelevated" value="{{patient.headofbedelevated}}">
 						<option value="{{patient.headofbedelevated}}" selected>{{patient.headofbedelevated}}</option>
-
 						<option type="text" value="yes">Yes</option>
-
 						<option type="text" value="no">No</option>
 					</select>
 				</div>   
 					
 				<input id="postBtn" type="submit" value="Edit" />
-		</form>
+			</form>
+		</div>
 	</body>
 </html>

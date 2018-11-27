@@ -37,61 +37,57 @@
                 </form>
             </nav>
 
-        <div>
-            <label class="modal-btn" for="modal-toggle">Register Hospital</label>
+            <div>
+                <label class="modal-btn" for="modal-toggle">Register Hospital</label>
 
-            <input id="modal-toggle" type="checkbox">
+                <input id="modal-toggle" type="checkbox">
 
-            <label class="modal-backdrop" for="modal-toggle"></label>
+                <label class="modal-backdrop" for="modal-toggle"></label>
 
-            <div class="modal-content">
-                <label class="modal-close-btn" for="modal-toggle">
-                    <svg width="50" height="50">
-                        <line x1="10" y1="10" x2="40" y2="40"/>
+                <div class="modal-content">
+                    <label class="modal-close-btn" for="modal-toggle">
+                        <svg width="50" height="50">
+                            <line x1="10" y1="10" x2="40" y2="40"/>
 
-                        <line x1="40" y1="10" x2="10" y2="40"/>
-                    </svg>
-                </label>
+                            <line x1="40" y1="10" x2="10" y2="40"/>
+                        </svg>
+                    </label>
 
-                <div class="tabs">
-                    <input class="radio" id="tab-2" name="tabs-name" type="radio">
+                    <div class="tabs">
+                        <input class="radio" id="tab-2" name="tabs-name" type="radio">
 
-                    <label for="tab-2" class="table"><span>Registration</span></label>
+                        <label for="tab-2" class="table"><span>Registration</span></label>
 
-                    <div class="tabs-content">
-                        <form action="/register-hospital" method="POST">
+                        <div class="tabs-content">
+                            <form action="/register-hospital" method="POST">
 
-                            <input type="text" name="username" placeholder="Hospital Name" required />
+                                <input type="text" name="username" placeholder="Hospital Name" required />
 
-                            <input type="password" name="password" placeholder="Password" required />
+                                <input type="password" name="password" placeholder="Password" required />
 
-                            <input type="text" name="address" placeholder="Address" required />
+                                <input type="text" name="address" placeholder="Address" required />
 
-                            <input type="text" name="city" placeholder="City" required />
+                                <input type="text" name="city" placeholder="City" required />
 
-                            <input type="text" name="state" placeholder="State" required />
+                                <input type="text" name="state" placeholder="State" required />
 
-                            <input type="number" name="zipcode" min="00000" max="99999" placeholder="Zipcode" required />
+                                <input type="number" name="zipcode" min="00000" max="99999" placeholder="Zipcode" required />
 
-                            <input type="tel" name="telephone" placeholder="Telephone" required />
+                                <input type="tel" name="telephone" placeholder="Telephone" required />
 
-                            <input type="submit" value="Register" />
+                                <input type="submit" value="Register" />
 
-                            <input type="reset" />
-                        </form>
+                                <input type="reset" />
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-            
         </header>
-
 
         <div class="background-frame">
             <img class="main-background"  src="styles/desktop.jpg" alt="main image">
         </div>
-
-
-        {{! </div> }}
 
         <div class="container">
             <a data-scroll href="#full"><div class="arrow"></div></a>
