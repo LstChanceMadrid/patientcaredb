@@ -1,5 +1,19 @@
 #Patient Care
-<<<<<<< HEAD
+
+#Live App Website
+- http://patientcaredb.herokuapp.com/
+
+#Login
+
+USE THE FOLLOWING CREDENTIALS FOR PREPOPULATED ACCOUNTS:
+
+1st login:
+- Username : Patient Care Hospital
+- Password : password
+
+2nd login:
+- Username : steve
+- Password : password
 
 
 #Registration Form
@@ -10,5 +24,3 @@ REQUIRED FIELDS
 - Sex
 - Admission Date
 - Telephone
-=======
->>>>>>> d59f8dc834558e5318c300c192c367160e3f6301
